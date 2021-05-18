@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;
@@ -8,7 +10,40 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-		// TODO 로직 구현
-		return null;
+		int matchOfCount = getMatchOfCount(userLotto);
+		boolean matchOfBonus = getMatchOfBonus(userLotto);
+
+		Rank resultOfMatch = Rank.valueOf(matchOfCount, matchOfBonus);
+
+		return resultOfMatch;
+	}
+
+	private int getMatchOfCount (Lotto userLotto) {
+		List<Integer> userLottoNums = userLotto.getNum();
+		List<Integer> targetNums = lotto.getNum();
+
+		int matchOfCount = 0;
+
+		for(int targetNum : targetNums) {
+			if(userLottoNums.contains(targetNums.get(targetNum))) {
+				matchOfCount++;
+			}
+		}
+
+		return matchOfCount;
+	}
+
+	private boolean getMatchOfBonus (Lotto userLotto) {
+		List<Integer> userLottoNums = userLotto.getNum();
+
+		boolean matchOfBonus = false;
+
+		for(int userNum : userLottoNums) {
+			if(userNum == bonusNo) {
+				matchOfBonus = true;
+			}
+		}
+
+		return matchOfBonus;
 	}
 }
