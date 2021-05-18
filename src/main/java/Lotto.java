@@ -7,5 +7,13 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	// 추가 기능 구현
+	public List<Integer> getNum() {
+		List<Integer> num = numbers;
+		return num;
+	}
+
+	public void printLottoNums() {
+		System.out.println(numbers);
+	}
+
 }
