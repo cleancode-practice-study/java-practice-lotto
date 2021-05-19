@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class PlayLottoGame {
     private static final int LOTTO_PRICE = 1000;
     private static final int MAX_LOTTO_COUNT = 6;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
 
     public void start() {
         getLotto();
@@ -46,7 +48,7 @@ public class PlayLottoGame {
         Random random = new Random();
 
         for(int i = 0; i < MAX_LOTTO_COUNT; i++){
-            lottoNumbers.add(random.nextInt(45) + 1);
+            lottoNumbers.add(random.nextInt(MAX_LOTTO_NUMBER) + MIN_LOTTO_NUMBER);
         }
 
         return lottoNumbers;

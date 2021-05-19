@@ -10,12 +10,10 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-		boolean matchBonus = bonusMatch(userLotto);
-
-		return Rank.valueOf(getNumMatch(userLotto), matchBonus);
+		return Rank.valueOf(getNumMatch(userLotto), getBonusNoMatch(userLotto));
 	}
 
-	private boolean bonusMatch(Lotto userLotto){
+	private boolean getBonusNoMatch(Lotto userLotto){
 		return userLotto.getNumbers().contains(bonusNo);
 	}
 
