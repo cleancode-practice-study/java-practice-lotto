@@ -1,8 +1,5 @@
 package model;
 
-import model.Lotto;
-import model.Rank;
-
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;
@@ -13,8 +10,8 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-		// 당첨번호와, 사용자번호 비교
-		// Rank.valueOf()
-		return null;
-	}
+        // 당첨번호와, 사용자번호 비교?
+        // Rank.valueOf()
+        return null;
+    }
 }

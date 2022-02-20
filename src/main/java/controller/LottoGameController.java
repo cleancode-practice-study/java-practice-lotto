@@ -1,8 +1,6 @@
 package controller;
 
 import model.Lotto;
-import model.WinningLotto;
-import util.RandomLottoNumberGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -12,7 +10,6 @@ import java.util.List;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
-    private static final int LOTTO_TICKET_LENGTH = 6;
 
     public void play() {
         initUserLottoNumber();
@@ -31,7 +28,7 @@ public class LottoGameController {
         int count = calculateLottoAmount(cost); // 구매 금액 > 구매 갯수로 변환
         OutputView.printPurchaseCount(count); // 구매 갯수 메세지 출력
         for (int i = 0; i < count; i++) {
-            List<Integer> number = getLottoNumber();
+            List<Integer> number = Lotto.getLottoNumber();
             OutputView.printLottoNumber(number); // 한 장의 로또 번호 6개 출력
         }
     }
@@ -55,17 +52,6 @@ public class LottoGameController {
         int bonusNumber = InputView.inputBonusBallNumber(); // 보너스 번호 입력
         numbers.add(bonusNumber);
         System.out.println("");
-
-        return numbers;
-    }
-
-    private List<Integer> getLottoNumber() {
-        List<Integer> numbers = new ArrayList<>();
-
-        for (int i = 0; i < LOTTO_TICKET_LENGTH; i++) {
-            int number = RandomLottoNumberGenerator.randomLottoNumber(); // 랜덤 로또 번호 생성
-            numbers.add(number);
-        }
 
         return numbers;
     }
