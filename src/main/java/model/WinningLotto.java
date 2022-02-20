@@ -1,3 +1,8 @@
+package model;
+
+import model.Lotto;
+import model.Rank;
+
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;
