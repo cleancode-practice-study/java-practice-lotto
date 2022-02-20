@@ -13,7 +13,8 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-		// TODO 로직 구현
+		// 당첨번호와, 사용자번호 비교
+		// Rank.valueOf()
 		return null;
 	}
 }
