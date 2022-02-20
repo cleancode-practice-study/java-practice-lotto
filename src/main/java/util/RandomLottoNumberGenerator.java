@@ -7,6 +7,7 @@ public class RandomLottoNumberGenerator {
 
     public static int randomLottoNumber() {
         Random random = new Random();
+
         return random.nextInt(MAX_RANDOM_NUMBER) + 1;
     }
 }
