@@ -1,3 +1,5 @@
+package domain;
+
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;

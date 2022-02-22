@@ -99,17 +99,17 @@ public class Application {
 }
 ```
 
-### 프로그래밍 요구사항 - Lotto
-- Lotto 객체를 활용해 구현해야 한다.
-- Lotto 기본 생성자를 추가할 수 없다.
+### 프로그래밍 요구사항 - domain.Lotto
+- domain.Lotto 객체를 활용해 구현해야 한다.
+- domain.Lotto 기본 생성자를 추가할 수 없다.
 - numbers 변수의 접근 제어자인 private을 변경할 수 없다.
 - Lotto에 필드(인스턴스 변수)를 추가할 수 없다. 
 
 ```java
-public class Lotto {
+public class domain.Lotto {
 	private final List<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public domain.Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
@@ -117,24 +117,24 @@ public class Lotto {
 }
 ```
 
-### 프로그래밍 요구사항 - WinningLotto
-- WinningLotto 객체를 활용해 구현해야 한다.
+### 프로그래밍 요구사항 - domain.WinningLotto
+- domain.WinningLotto 객체를 활용해 구현해야 한다.
 - match() 메서드의 반환 값인 Rank는 저장소에서 제공한다.
-- WinningLotto 기본 생성자를 추가할 수 없다.
+- domain.WinningLotto 기본 생성자를 추가할 수 없다.
 - lotto, bonusNo 변수의 접근제어자인 private을 변경할 수 없다.
 - WinningLotto에 필드(인스턴스 변수)를 추가할 수 없다.
 
 ```java
-public class WinningLotto {
-	private final Lotto lotto;
+public class domain.WinningLotto {
+	private final domain.Lotto lotto;
 	private final int bonusNo;
 
-	public WinningLotto(Lotto lotto, int bonusNo) {
+	public domain.WinningLotto(domain.Lotto lotto, int bonusNo) {
 		this.lotto = lotto;
 		this.bonusNo = bonusNo;
 	}
 
-	public Rank match(Lotto userLotto) {
+	public domain.Rank match(domain.Lotto userLotto) {
 		// TODO 로직 구현
 		return null;
 	}
