@@ -2,14 +2,12 @@ package controller;
 
 import domain.CreateLottoNumber;
 import domain.Lotto;
+import domain.Rank;
 import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 public class Controller {
@@ -18,6 +16,7 @@ public class Controller {
     public void run() {
         List<Lotto> lottoes = createLottoes();
         WinningLotto winningLotto = createWinningLotto();
+        checkLottoWinResult(winningLotto, lottoes);
     }
 
     // 랜덤 로또 생성
@@ -119,6 +118,19 @@ public class Controller {
 
     private boolean checkDuplicatedNumber(Set<Integer> winningNumber) {
         return winningNumber.size() == 6;
+    }
+
+    private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+
+    }
+
+    private Map<Integer, Integer> checkLottoWinResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+        Map<Integer, Integer> lottoResult = new LinkedHashMap<>();
+        for(Lotto lotto : lottoes) {
+            Rank rank = winningLotto.match(lotto);
+            lottoResult.put(rank.getCountOfMatch(), lottoResult.getOrDefault(rank.getCountOfMatch(), 0) + 1);
+        }
+        return lottoResult;
     }
 
 }
