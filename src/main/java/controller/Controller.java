@@ -24,7 +24,7 @@ public class Controller {
 
         List<Lotto> lottoes = new ArrayList<>();
 
-        for (int i = 0 ; i < lottoCount ; i++) {
+        for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = createOneLotto();
             lottoes.add(lotto);
         }
@@ -60,9 +60,20 @@ public class Controller {
 
     // 구매한 로또 번호 출력
     private void printLottoNumber(List<Lotto> lottoes) {
-        for(Lotto lotto : lottoes) {
+        for (Lotto lotto : lottoes) {
             OutputView.printLottoNumber(lotto);
         }
+    }
+
+    private List<Integer> splitWinnigLottoNumber(String winningNumber) {
+        String[] splitNumbers = winningNumber.split(",");
+        List<Integer> winningLottoNumber = new ArrayList<>();
+
+        for (String number : splitNumbers) {
+            winningLottoNumber.add(Integer.parseInt(number));
+        }
+
+        return winningLottoNumber;
     }
 
     private String getWinningLottoNumber() {
