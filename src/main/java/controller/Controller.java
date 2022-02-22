@@ -7,13 +7,14 @@ import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
+
 
 public class Controller {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
 
     public void run() {
         List<Lotto> lottoes = createLottoes();
+        String num = getWinningLottoNumber();
     }
 
     private List<Lotto> createLottoes() {
@@ -30,6 +31,8 @@ public class Controller {
         }
 
         printLottoNumber(lottoes);
+
+        System.out.println();
 
         return lottoes;
     }
@@ -61,5 +64,9 @@ public class Controller {
         for(Lotto lotto : lottoes) {
             OutputView.printLottoNumber(lotto);
         }
+    }
+
+    private String getWinningLottoNumber() {
+        return InputView.inputWinningLottoNumber();
     }
 }
