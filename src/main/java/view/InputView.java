@@ -37,4 +37,9 @@ public class InputView {
         return scanner.next();
     }
 
+    public static int inputWinningBonusNumber() {
+        System.out.println(WINNING_LOTTO_BONUS_INPUT_MESSAGE);
+        return getInt();
+    }
+
 }

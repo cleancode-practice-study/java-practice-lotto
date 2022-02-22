@@ -14,7 +14,6 @@ public class Controller {
 
     public void run() {
         List<Lotto> lottoes = createLottoes();
-        String num = getWinningLottoNumber();
     }
 
     private List<Lotto> createLottoes() {
@@ -68,5 +67,9 @@ public class Controller {
 
     private String getWinningLottoNumber() {
         return InputView.inputWinningLottoNumber();
+    }
+
+    private int getWinningBonusNumber() {
+        return InputView.inputWinningBonusNumber();
     }
 }
