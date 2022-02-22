@@ -7,7 +7,9 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class Controller {
@@ -70,26 +72,27 @@ public class Controller {
 
     // 당첨 로또 객체 생성
     private WinningLotto createWinningLotto() {
-        String winningNum = getWinningLottoNumber();
+        boolean isValid = false;
+        Set<Integer> winningNumberForCheck = null;
+
+        // 당첨 번호 입력을 중복으로 했을 경우 다시 입력 받도록 함.
+        while (!isValid) {
+            String winningNum = getWinningLottoNumber();
+
+            winningNumberForCheck = splitWinnigLottoNumber(winningNum);
+
+            isValid = checkDuplicatedNumber(winningNumberForCheck);
+
+            InputView.checkValidWinningLottoNumber(isValid);
+        }
+
         int bonusNum = getWinningBonusNumber();
 
-        List<Integer> winningLottoNumber = splitWinnigLottoNumber(winningNum);
+        List<Integer> winningLottoNumber = new ArrayList<>(winningNumberForCheck);
 
         Lotto lotto = new Lotto(winningLottoNumber);
 
         return new WinningLotto(lotto, bonusNum);
-    }
-
-    // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
-    private List<Integer> splitWinnigLottoNumber(String winningNumber) {
-        String[] splitNumbers = winningNumber.split(",");
-        List<Integer> winningLottoNumber = new ArrayList<>();
-
-        for (String number : splitNumbers) {
-            winningLottoNumber.add(Integer.parseInt(number));
-        }
-
-        return winningLottoNumber;
     }
 
     // 당첨 로또 번호 받기
@@ -101,4 +104,21 @@ public class Controller {
     private int getWinningBonusNumber() {
         return InputView.inputWinningBonusNumber();
     }
+
+    // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
+    private Set<Integer> splitWinnigLottoNumber(String winningNumber) {
+        String[] splitNumbers = winningNumber.split(",");
+        Set<Integer> winningLottoNumber = new HashSet<>();
+
+        for (String number : splitNumbers) {
+            winningLottoNumber.add(Integer.parseInt(number));
+        }
+
+        return winningLottoNumber;
+    }
+
+    private boolean checkDuplicatedNumber(Set<Integer> winningNumber) {
+        return winningNumber.size() == 6;
+    }
+
 }
