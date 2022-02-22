@@ -2,6 +2,7 @@ package controller;
 
 import domain.CreateLottoNumber;
 import domain.Lotto;
+import domain.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
@@ -14,8 +15,10 @@ public class Controller {
 
     public void run() {
         List<Lotto> lottoes = createLottoes();
+        WinningLotto winningLotto = createWinningLotto();
     }
 
+    // 랜덤 로또 생성
     private List<Lotto> createLottoes() {
         int lottoPrice = getLottoPrice();
         int lottoCount = getLottoCount(lottoPrice);
@@ -65,6 +68,19 @@ public class Controller {
         }
     }
 
+    // 당첨 로또 객체 생성
+    private WinningLotto createWinningLotto() {
+        String winningNum = getWinningLottoNumber();
+        int bonusNum = getWinningBonusNumber();
+
+        List<Integer> winningLottoNumber = splitWinnigLottoNumber(winningNum);
+
+        Lotto lotto = new Lotto(winningLottoNumber);
+
+        return new WinningLotto(lotto, bonusNum);
+    }
+
+    // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
     private List<Integer> splitWinnigLottoNumber(String winningNumber) {
         String[] splitNumbers = winningNumber.split(",");
         List<Integer> winningLottoNumber = new ArrayList<>();
@@ -76,10 +92,12 @@ public class Controller {
         return winningLottoNumber;
     }
 
+    // 당첨 로또 번호 받기
     private String getWinningLottoNumber() {
         return InputView.inputWinningLottoNumber();
     }
 
+    // 당첨 로또 보너스 받기
     private int getWinningBonusNumber() {
         return InputView.inputWinningBonusNumber();
     }
