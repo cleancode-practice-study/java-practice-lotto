@@ -9,7 +9,9 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-
+	public void printLottoNum() {
+		System.out.println(numbers);
+	}
 
 	// 추가 기능 구현
 }

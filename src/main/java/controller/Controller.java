@@ -29,6 +29,8 @@ public class Controller {
             lottoes.add(lotto);
         }
 
+        printLottoNumber(lottoes);
+
         return lottoes;
     }
 
@@ -52,5 +54,12 @@ public class Controller {
     private Lotto createOneLotto() {
         List<Integer> lottoNums = CreateLottoNumber.createLottosNumber();
         return new Lotto(lottoNums);
+    }
+
+    // 구매한 로또 번호 출력
+    private void printLottoNumber(List<Lotto> lottoes) {
+        for(Lotto lotto : lottoes) {
+            OutputView.printLottoNumber(lotto);
+        }
     }
 }
