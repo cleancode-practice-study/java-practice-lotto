@@ -21,10 +21,13 @@ public class Controller {
 
     // 랜덤 로또 생성
     private List<Lotto> createLottoes() {
-        int lottoPrice = getLottoPrice();
+        // 얼마 어치의 로또를 구매할 건지 입력
+        int lottoPrice = InputView.inputLottoPurchasePrice();
         int lottoCount = getLottoCount(lottoPrice);
 
-        printLottoCount(lottoCount);
+        // 몇 개의 로또를 구매했는 지 출력
+        System.out.println();
+        OutputView.printLottoCount(lottoCount);
 
         List<Lotto> lottoes = new ArrayList<>();
 
@@ -35,25 +38,12 @@ public class Controller {
 
         printLottoNumber(lottoes);
 
-        System.out.println();
-
         return lottoes;
-    }
-
-    // 얼마 어치의 로또를 구매할 건지 입력
-    private int getLottoPrice() {
-        return InputView.inputLottoPurchasePrice();
     }
 
     // 로또 금액 받아서 몇개 산 건지 계산
     private int getLottoCount(int lottoPrice) {
         return lottoPrice / LOTTO_PRICE_PER_ONE;
-    }
-
-    // 몇 개의 로또를 구매했는 지 출력
-    private void printLottoCount(int lottoCount) {
-        System.out.println();
-        OutputView.printLottoCount(lottoCount);
     }
 
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
@@ -67,6 +57,7 @@ public class Controller {
         for (Lotto lotto : lottoes) {
             OutputView.printLottoNumber(lotto);
         }
+        System.out.println();
     }
 
     // 당첨 로또 객체 생성
@@ -76,7 +67,8 @@ public class Controller {
 
         // 당첨 번호 입력을 중복으로 했을 경우 다시 입력 받도록 함.
         while (!isValid) {
-            String winningNum = getWinningLottoNumber();
+            // 당첨 로또 번호 받기
+            String winningNum = InputView.inputWinningLottoNumber();
 
             winningNumberForCheck = splitWinnigLottoNumber(winningNum);
 
@@ -85,23 +77,14 @@ public class Controller {
             InputView.checkValidWinningLottoNumber(isValid);
         }
 
-        int bonusNum = getWinningBonusNumber();
+        // 당첨 로또 보너스 받기
+        int bonusNum = InputView.inputWinningBonusNumber();
 
         List<Integer> winningLottoNumber = new ArrayList<>(winningNumberForCheck);
 
         Lotto lotto = new Lotto(winningLottoNumber);
 
         return new WinningLotto(lotto, bonusNum);
-    }
-
-    // 당첨 로또 번호 받기
-    private String getWinningLottoNumber() {
-        return InputView.inputWinningLottoNumber();
-    }
-
-    // 당첨 로또 보너스 받기
-    private int getWinningBonusNumber() {
-        return InputView.inputWinningBonusNumber();
     }
 
     // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
@@ -121,14 +104,19 @@ public class Controller {
     }
 
     private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+        // 맞은 로또 결과 저장할 Map 초기화
         Map<Rank, Integer> lottoResult = createResult();
 
+        // 당첨 금액 구하기
         int totalGetMoney = checkLottoWinCount(winningLotto, lottoes, lottoResult);
 
+        // 당첨 결과 리스트로 받기 순서대로 [3개 일치, 4개일치, 5개 일치, 5개 + 보너스 일치, 6개 일치 개수]
         List<Integer> winningResult = getLottoWinResult(lottoResult);
 
+        // 당첨 금액과 구매 금액으로 수익률 구하기
         double yield = getYield(totalGetMoney, lottoes.size() * LOTTO_PRICE_PER_ONE);
 
+        // 당첨 통계 출력
         OutputView.printLottoResult(winningResult);
         OutputView.pringLottoYield(yield);
     }
@@ -153,7 +141,9 @@ public class Controller {
         for(Lotto lotto : lottoes) {
             // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
             Rank rank = winningLotto.match(lotto);
+
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
+
             totalWinMoney += rank.getWinningMoney();
         }
 
