@@ -16,7 +16,7 @@ public class Controller {
     public void run() {
         List<Lotto> lottoes = createLottoes();
         WinningLotto winningLotto = createWinningLotto();
-        checkLottoWinResult(winningLotto, lottoes);
+        printResult(winningLotto, lottoes);
     }
 
     // 랜덤 로또 생성
@@ -121,16 +121,59 @@ public class Controller {
     }
 
     private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+        Map<Rank, Integer> lottoResult = createResult();
 
+        int totalGetMoney = checkLottoWinCount(winningLotto, lottoes, lottoResult);
+
+        List<Integer> winningResult = getLottoWinResult(lottoResult);
+
+        double yield = getYield(totalGetMoney, lottoes.size() * LOTTO_PRICE_PER_ONE);
+
+        OutputView.printLottoResult(winningResult);
+        OutputView.pringLottoYield(yield);
     }
 
-    private Map<Integer, Integer> checkLottoWinResult(WinningLotto winningLotto, List<Lotto> lottoes) {
-        Map<Integer, Integer> lottoResult = new LinkedHashMap<>();
-        for(Lotto lotto : lottoes) {
-            Rank rank = winningLotto.match(lotto);
-            lottoResult.put(rank.getCountOfMatch(), lottoResult.getOrDefault(rank.getCountOfMatch(), 0) + 1);
-        }
+    // 맞은 로또 결과 저장할 Map 초기화
+    private  Map<Rank, Integer> createResult(){
+        Map<Rank, Integer> lottoResult = new HashMap<>();
+
+        lottoResult.put(Rank.MISS, 0);
+        lottoResult.put(Rank.FIFTH, 0);
+        lottoResult.put(Rank.FOURTH, 0);
+        lottoResult.put(Rank.THIRD, 0);
+        lottoResult.put(Rank.SECOND, 0);
+        lottoResult.put(Rank.FIRST, 0);
+
         return lottoResult;
+    }
+
+    private int checkLottoWinCount(WinningLotto winningLotto, List<Lotto> lottoes, Map<Rank, Integer> lottoResult) {
+        int totalWinMoney = 0;
+
+        for(Lotto lotto : lottoes) {
+            // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
+            Rank rank = winningLotto.match(lotto);
+            lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
+            totalWinMoney += rank.getWinningMoney();
+        }
+
+        return totalWinMoney;
+    }
+
+    private List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
+        List<Integer> lottoWinResult = new ArrayList<>();
+
+        lottoWinResult.add(lottoResult.get(Rank.FIFTH));
+        lottoWinResult.add(lottoResult.get(Rank.FOURTH));
+        lottoWinResult.add(lottoResult.get(Rank.THIRD));
+        lottoWinResult.add(lottoResult.get(Rank.SECOND));
+        lottoWinResult.add(lottoResult.get(Rank.FIRST));
+
+        return lottoWinResult;
+    }
+
+    private double getYield(int totalGetMoney, int lottoPrice) {
+        return (double)totalGetMoney / lottoPrice;
     }
 
 }
