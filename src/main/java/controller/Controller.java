@@ -67,7 +67,9 @@ public class Controller {
 
             isValid = checkDuplicatedNumber(winningNumberForCheck);
 
-            InputView.checkValidWinningLottoNumber(isValid);
+            if (!isValid) {
+                OutputView.printInvalidLottoNumberError();
+            }
         }
 
         // 당첨 로또 보너스 받기

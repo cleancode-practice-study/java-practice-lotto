@@ -3,10 +3,10 @@ package view;
 import domain.Lotto;
 
 import java.util.List;
-import java.util.Map;
 
 public class OutputView {
     private static final String LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE = "%s개를 구매했습니다.";
+    private static final String WINNING_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 있습니다. 다시 입력해 주세요.";
     private static final String LOTTO_RESULT_OUTPUT_MESSAGE = "당첨 통계\n----------------";
     private static final String LOTTO_FIFTH_OUTPUT_MESSAGE = "3개 일치 (5000원) - %d개\n";
     private static final String LOTTO_FOURTH_OUTPUT_MESSAGE = "4개 일치 (50000원) - %d개\n";
@@ -19,6 +19,10 @@ public class OutputView {
         System.out.println();
         System.out.printf(LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE, lottoCount);
         System.out.println();
+    }
+
+    public static void printInvalidLottoNumberError() {
+        System.out.println(WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
     public static void printLottoNumber(Lotto lotto) {
