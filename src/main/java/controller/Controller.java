@@ -26,7 +26,6 @@ public class Controller {
         int lottoCount = getLottoCount(lottoPrice);
 
         // 몇 개의 로또를 구매했는 지 출력
-        System.out.println();
         OutputView.printLottoCount(lottoCount);
 
         List<Lotto> lottoes = new ArrayList<>();
@@ -34,9 +33,11 @@ public class Controller {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = createOneLotto();
             lottoes.add(lotto);
+            // 구매한 로또 번호 출력
+            OutputView.printLottoNumber(lotto);
         }
 
-        printLottoNumber(lottoes);
+        OutputView.printNextLine();
 
         return lottoes;
     }
@@ -50,14 +51,6 @@ public class Controller {
     private Lotto createOneLotto() {
         List<Integer> lottoNums = CreateLottoNumber.createLottosNumber();
         return new Lotto(lottoNums);
-    }
-
-    // 구매한 로또 번호 출력
-    private void printLottoNumber(List<Lotto> lottoes) {
-        for (Lotto lotto : lottoes) {
-            OutputView.printLottoNumber(lotto);
-        }
-        System.out.println();
     }
 
     // 당첨 로또 객체 생성

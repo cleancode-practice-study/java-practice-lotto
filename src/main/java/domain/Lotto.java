@@ -10,8 +10,8 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public void printLottoNum() {
-		System.out.println(numbers);
+	public List<Integer> getLottoNum() {
+		return numbers;
 	}
 
 	public int countOfMatch (Lotto lotto) {

@@ -16,12 +16,13 @@ public class OutputView {
     private static final String LOTTO_YIELD_OUTPUT_MESSAGE = "총 수익률은 %.2f입니다.\n";
 
     public static void printLottoCount(int lottoCount) {
+        System.out.println();
         System.out.printf(LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE, lottoCount);
         System.out.println();
     }
 
     public static void printLottoNumber(Lotto lotto) {
-        lotto.printLottoNum();
+        System.out.println(lotto.getLottoNum());
     }
 
     public static void printLottoResult(List<Integer> winningResult) {
@@ -36,5 +37,9 @@ public class OutputView {
 
     public static void pringLottoYield(double yield) {
         System.out.printf(LOTTO_YIELD_OUTPUT_MESSAGE, yield);
+    }
+
+    public static void printNextLine() {
+        System.out.println();
     }
 }
