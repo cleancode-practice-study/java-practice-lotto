@@ -43,12 +43,12 @@ public class Controller {
     }
 
     // 로또 금액 받아서 몇개 산 건지 계산
-    private int getLottoCount(int lottoPrice) {
+    public int getLottoCount(int lottoPrice) {
         return lottoPrice / LOTTO_PRICE_PER_ONE;
     }
 
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
-    private Lotto createOneLotto() {
+    public Lotto createOneLotto() {
         List<Integer> lottoNums = CreateLottoNumber.createLottosNumber();
         return new Lotto(lottoNums);
     }
@@ -83,7 +83,7 @@ public class Controller {
     }
 
     // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
-    private Set<Integer> splitWinnigLottoNumber(String winningNumber) {
+    public Set<Integer> splitWinnigLottoNumber(String winningNumber) {
         String[] splitNumbers = winningNumber.split(",");
         Set<Integer> winningLottoNumber = new HashSet<>();
 
@@ -94,7 +94,7 @@ public class Controller {
         return winningLottoNumber;
     }
 
-    private boolean checkDuplicatedNumber(Set<Integer> winningNumber) {
+    public boolean checkDuplicatedNumber(Set<Integer> winningNumber) {
         return winningNumber.size() == 6;
     }
 
@@ -145,7 +145,7 @@ public class Controller {
         return totalWinMoney;
     }
 
-    private List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
+    public List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
         List<Integer> lottoWinResult = new ArrayList<>();
 
         lottoWinResult.add(lottoResult.get(Rank.FIFTH));
