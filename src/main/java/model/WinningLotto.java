@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class WinningLotto {
 	private final Lotto lotto;
 	private final int bonusNo;
@@ -10,8 +12,19 @@ public class WinningLotto {
 	}
 
 	public Rank match(Lotto userLotto) {
-        // 당첨번호와, 사용자번호 비교?
-        // Rank.valueOf()
-        return null;
-    }
+		return Rank.valueOf(getCountOfMatch(userLotto), getMatchBonus(userLotto));
+	}
+
+	public int getCountOfMatch(Lotto userLotto) {
+		List<Integer> user = userLotto.getNumber();
+		List<Integer> winning = lotto.getNumber();
+
+		user.retainAll(winning);
+
+		return user.size();
+	}
+
+	public boolean getMatchBonus(Lotto userLotto) {
+		return userLotto.getNumber().contains(bonusNo);
+	}
 }
