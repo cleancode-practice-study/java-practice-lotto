@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static model.inputValidator.isValidateBonusNumber;
+import static model.inputValidator.isValidateCost;
+
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
@@ -26,7 +29,11 @@ public class LottoGameController {
 
     // 구매 금액 입력
     private int inputCost() {
-        int cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
+        int cost = LOTTO_TICKET_PRICE;
+        do {
+            cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
+        } while (!(isValidateCost(cost)));
+
         System.out.println("");
 
         return cost;
@@ -84,7 +91,10 @@ public class LottoGameController {
     // 지난 주 당첨 번호 입력
     private WinningLotto inputLastWeekNumber() {
         String lottoNumber = InputView.inputLastWeekWinningNumber(); // 지난주 당첨번호 입력
-        int bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
+        int bonusNumber = 1;
+        do {
+            bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
+        } while (!(isValidateBonusNumber(bonusNumber)));
 
         String[] number = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
         List<Integer> numbers = new ArrayList(Arrays.asList(number)); // List로 변환
