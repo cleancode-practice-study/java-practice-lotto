@@ -12,20 +12,19 @@ public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     public void play() {
-        initUserLottoNumber();
-        List<Integer> numbers = inputLastWeekLottoNumber(); // 지난 주 당첨번호, 보너스번호 입력
+        List<Lotto> userNumbers = getUserLottoNumber(); // 구매한 갯수만큼 유저 로또 번호 리스트
+        System.out.println("");
+        Lotto winningNumbers = inputLastWeekLottoNumber(); // 지난 주 당첨번호 입력
+        int winningBnsNumber = inputLastWeekBonusNumber(); // 지난 주 보너스 번호 입력
+
         printWinningResult();
     }
 
-    private void initUserLottoNumber() {
+    private int initUserLotto() {
         int cost = InputView.inputLottoPurchaseAmount(); // 구매금액 입력
         System.out.println("");
 
-        int count = printPurchaseCountMessage(cost);
-        for (int i = 0; i < count; i++) {
-            printPurchaseResult(); // 구매한 결과 출력
-        }
-        System.out.println("");
+        return cost;
     }
 
     private int printPurchaseCountMessage(int cost) {
@@ -35,11 +34,21 @@ public class LottoGameController {
         return count;
     }
 
-    private List<Integer> printPurchaseResult() {
-        List<Integer> number = Lotto.getLottoNumber();
-        OutputView.printLottoNumber(number); // 한 장의 로또 번호 6개 출력
+    private List<Lotto> getUserLottoNumber() {
+        List<Lotto> userLotto = new ArrayList<>();
+        List<Integer> number = new ArrayList<>();
+        int cost = initUserLotto();
 
-        return number;
+        int count = printPurchaseCountMessage(cost);
+        for (int i = 0; i < count; i++) {
+            number = Lotto.getLottoNumber();
+            OutputView.printLottoNumber(number); // 한 장의 로또 번호 6개 출력, 구매한 결과 출력
+        }
+
+        Lotto lotto = new Lotto(number);
+        userLotto.add(lotto);
+
+        return userLotto;
     }
 
     // 구매 갯수 계산 메소드
@@ -52,17 +61,21 @@ public class LottoGameController {
         return number.split(",");
     }
 
-    private List<Integer> inputLastWeekLottoNumber() {
+    private Lotto inputLastWeekLottoNumber() {
         String lottoNumber = InputView.inputLastWeekWinningNumber(); // 지난 주 당첨번호 입력
 
         String[] number = splitLastWeekNumber(lottoNumber);
         List<Integer> numbers = new ArrayList(Arrays.asList(number));
+        Lotto winningLotto = new Lotto(numbers);
 
+        return winningLotto;
+    }
+
+    private int inputLastWeekBonusNumber() {
         int bonusNumber = InputView.inputBonusBallNumber(); // 보너스 번호 입력
-        numbers.add(bonusNumber);
         System.out.println("");
 
-        return numbers;
+        return bonusNumber;
     }
 
     private void printWinningResult() {
