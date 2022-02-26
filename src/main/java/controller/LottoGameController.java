@@ -20,7 +20,7 @@ public class LottoGameController {
         List<Lotto> userLotto = createUserLotto();
         System.out.println("");
 
-        WinningLotto winningLotto = inputLastWeekNumber(); // 지난 주 당첨번호 입력
+        WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
         getStatistics(winningLotto, userLotto);
 
@@ -89,18 +89,33 @@ public class LottoGameController {
     }
 
     // 지난 주 당첨 번호 입력
-    private WinningLotto inputLastWeekNumber() {
+    private String[] inputLastWeekNumber() {
         String[] number = new String[6];
-        int bonusNumber = LOTTO_MIN_RANDOM_NUMBER;
+
         do {
             String lottoNumber = InputView.inputLastWeekWinningNumber(); // 지난주 당첨번호 입력
             number = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
         }
         while (!(isValidateWinningNumberLength(number)));
 
+        return number;
+    }
+
+    // 지난 주 보너스 번호 입력
+    private int inputBonusNumber() {
+        int bonusNumber = LOTTO_MIN_RANDOM_NUMBER;
+
         do {
             bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
         } while (!(isValidateBonusNumber(bonusNumber)));
+
+        return bonusNumber;
+    }
+
+    // 당첨로또 생성
+    private WinningLotto createWinningLotto() {
+        String[] number = inputLastWeekNumber();
+        int bonusNumber = inputBonusNumber();
 
         List<Integer> numbers = new ArrayList(Arrays.asList(number)); // List로 변환
 
