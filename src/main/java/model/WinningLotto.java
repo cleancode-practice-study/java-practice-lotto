@@ -18,7 +18,12 @@ public class WinningLotto {
     // 당첨 번호와 사용자 로또 번호가 일치하는 숫자가 몇개인지 반환
     public int getCountOfMatch(Lotto userLotto) {
         List<Integer> user = userLotto.getNumber();
+        // System.out.println(user);
         List<Integer> winning = lotto.getNumber();
+        // System.out.println(winning);
+
+        user.retainAll(winning);
+        System.out.println(user);
 
         System.out.println("일치하는 갯수: " + user.size());
 

@@ -14,12 +14,13 @@ public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     public void play() {
-        List<Lotto> userNumbers = createUserLotto();
+        List<Lotto> userLotto = createUserLotto();
         System.out.println("");
 
         WinningLotto winningLotto = inputLastWeekNumber(); // 지난 주 당첨번호 입력
-        Rank rank = winningLotto.match(userNumbers.get(0));
-        System.out.println(rank);
+
+        getStatistics(winningLotto, userLotto);
+
         // printWinningStatisticsResult(numbers, userNumbers);
     }
 
@@ -53,12 +54,11 @@ public class LottoGameController {
     }
 
     // 구매 갯수 만큼 로또 총 티켓 생성
-    private List<Lotto> getUserNumber(int count) {
+    public List<Lotto> getUserNumber(int count) {
         List<Lotto> userLotto = new ArrayList<>();
-        List<Integer> lottoNumber = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-            lottoNumber = Lotto.getRandomNumber();
+            List<Integer> lottoNumber = Lotto.getRandomNumber();
             Lotto user = new Lotto(lottoNumber);
             userLotto.add(user);
         }
@@ -96,13 +96,19 @@ public class LottoGameController {
         return winningLotto;
     }
 
-    private void getStatistics(Lotto winningNumber, Lotto userNumber) {
-        winningNumber.getNumber();
+    // 당첨 금액구하기
+    // 몇개 일치하는지 String 배열에 담아서 HashMap의 getOfDefault()로 통계내기
+
+    private void getStatistics(WinningLotto winningLotto, List<Lotto> userLotto) {
+        int totalWinningMoney = 0;
+        for (int i = 0; i < userLotto.size(); i++) {
+            Rank rank = winningLotto.match(userLotto.get(i));
+            totalWinningMoney = +rank.getWinningMoney();
+        }
     }
 
     // 당첨 통계 출력
     private void printWinningStatisticsResult(Lotto winningNumber, List<Lotto> userLottoNumbers) {
-        getStatistics(winningNumber, userLottoNumbers.get(0));
         OutputView.printWinningStatisticsResult();
         // OutputView.printYield(yield);
     }
