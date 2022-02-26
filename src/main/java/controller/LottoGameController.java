@@ -10,21 +10,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static model.inputValidator.*;
+import static model.InputValidator.*;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int LOTTO_MIN_RANDOM_NUMBER = 1;
 
     public void play() {
-        List<Lotto> userLotto = createUserLotto();
-        System.out.println("");
-
+        List<Lotto> userLottoes = createUserLotto();
         WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
-        getStatistics(winningLotto, userLotto);
+        getStatistics(winningLotto, userLottoes);
 
-        // printWinningStatisticsResult(numbers, userNumbers);
+        // printWinningStatisticsResult();
     }
 
     // 구매 금액 입력
@@ -62,23 +60,26 @@ public class LottoGameController {
 
     // 구매 갯수 만큼 로또 총 티켓 생성
     public List<Lotto> getUserNumber(int count) {
-        List<Lotto> userLotto = new ArrayList<>();
+        List<Lotto> userLottoes = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
             List<Integer> lottoNumber = Lotto.getRandomNumber();
             Lotto user = new Lotto(lottoNumber);
-            userLotto.add(user);
+            userLottoes.add(user);
         }
 
-        printUserNumber(userLotto);
+        printUserNumber(userLottoes);
+        System.out.println("");
 
-        return userLotto; // 총 로또 티켓 반환
+        return userLottoes; // 총 로또 티켓 반환
     }
 
     // 사용자 로또 번호 총 출력
-    private void printUserNumber(List<Lotto> userLotto) {
-        for (int i = 0; i < userLotto.size(); i++) {
-            List<Integer> lottoNumber = userLotto.get(i).getNumber();
+    private void printUserNumber(List<Lotto> userLottoes) {
+        for (int i = 0; i < userLottoes.size(); i++) {
+            Lotto userLotto = userLottoes.get(i);
+            List<Integer> lottoNumber = userLotto.getNumber();
+
             OutputView.printUserLottoNumber(lottoNumber); // 한 장의 구매한 로또 번호 6개 출력
         }
     }
@@ -112,13 +113,12 @@ public class LottoGameController {
         return bonusNumber;
     }
 
-    // 당첨로또 생성
+    // 당첨 로또 생성
     private WinningLotto createWinningLotto() {
         String[] number = inputLastWeekNumber();
         int bonusNumber = inputBonusNumber();
 
         List<Integer> numbers = new ArrayList(Arrays.asList(number)); // List로 변환
-
         Lotto lastWeekNumber = new Lotto(numbers); // 로또 티켓 생성
 
         WinningLotto winningLotto = new WinningLotto(lastWeekNumber, bonusNumber);
@@ -129,16 +129,17 @@ public class LottoGameController {
     // 당첨 금액구하기
     // 몇개 일치하는지 String 배열에 담아서 HashMap의 getOfDefault()로 통계내기
 
-    private void getStatistics(WinningLotto winningLotto, List<Lotto> userLotto) {
+    private void getStatistics(WinningLotto winningLotto, List<Lotto> userLottoes) {
         int totalWinningMoney = 0;
-        for (int i = 0; i < userLotto.size(); i++) {
-            Rank rank = winningLotto.match(userLotto.get(i));
-            totalWinningMoney = +rank.getWinningMoney();
+
+        for (int i = 0; i < userLottoes.size(); i++) {
+            Rank rank = winningLotto.match(userLottoes.get(i));
+            totalWinningMoney += rank.getWinningMoney();
         }
     }
 
     // 당첨 통계 출력
-    private void printWinningStatisticsResult(Lotto winningNumber, List<Lotto> userLottoNumbers) {
+    private void printWinningStatisticsResult(List<Integer> match, int winningMoney) {
         OutputView.printWinningStatisticsResult();
         // OutputView.printYield(yield);
     }

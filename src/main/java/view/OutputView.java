@@ -7,8 +7,8 @@ public class OutputView {
         System.out.println(amount + "개를 구매했습니다.");
     }
 
-    public static void printUserLottoNumber(List<Integer> lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void printUserLottoNumber(List<Integer> userLottoNumber) {
+        System.out.println(userLottoNumber);
     }
 
     public static void printWinningStatisticsResult() {
