@@ -13,7 +13,7 @@ public class Lotto {
 		this.numbers = numbers;
 	}
 
-	public static List<Integer> getLottoNumber() {
+	public static List<Integer> getRandomNumber() {
 		List<Integer> numbers = new ArrayList<>();
 
 		for (int i = 0; i < LOTTO_TICKET_LENGTH; i++) {
@@ -21,6 +21,10 @@ public class Lotto {
 			numbers.add(number);
 		}
 
+		return numbers;
+	}
+
+	public List<Integer> getNumber() {
 		return numbers;
 	}
 

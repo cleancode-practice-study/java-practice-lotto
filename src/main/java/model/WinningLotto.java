@@ -21,6 +21,8 @@ public class WinningLotto {
 
 		user.retainAll(winning);
 
+		System.out.println(user.size());
+
 		return user.size();
 	}
 
