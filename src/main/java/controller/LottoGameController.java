@@ -14,6 +14,7 @@ import static model.inputValidator.*;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
+    private static final int LOTTO_MIN_RANDOM_NUMBER = 1;
 
     public void play() {
         List<Lotto> userLotto = createUserLotto();
@@ -83,23 +84,23 @@ public class LottoGameController {
     }
 
     // 지난 주 당첨번호 String > String[] 스플릿
-    private String[] splitLastWeekNumber(String number) {
+    public String[] splitLastWeekNumber(String number) {
         return number.split(",");
     }
 
     // 지난 주 당첨 번호 입력
     private WinningLotto inputLastWeekNumber() {
         String[] number = new String[6];
+        int bonusNumber = LOTTO_MIN_RANDOM_NUMBER;
         do {
             String lottoNumber = InputView.inputLastWeekWinningNumber(); // 지난주 당첨번호 입력
             number = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
         }
         while (!(isValidateWinningNumberLength(number)));
-        int bonusNumber = 1;
+
         do {
             bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
         } while (!(isValidateBonusNumber(bonusNumber)));
-
 
         List<Integer> numbers = new ArrayList(Arrays.asList(number)); // List로 변환
 
