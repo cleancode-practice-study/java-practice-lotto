@@ -20,17 +20,26 @@ public class LottoGameController {
     private void initUserLottoNumber() {
         int cost = InputView.inputLottoPurchaseAmount(); // 구매금액 입력
         System.out.println("");
-        printPurchaseResult(cost); // 구매한 결과 출력
+
+        int count = printPurchaseCountMessage(cost);
+        for (int i = 0; i < count; i++) {
+            printPurchaseResult(); // 구매한 결과 출력
+        }
         System.out.println("");
     }
 
-    private void printPurchaseResult(int cost) {
+    private int printPurchaseCountMessage(int cost) {
         int count = calculateLottoAmount(cost); // 구매 금액 > 구매 갯수로 변환
         OutputView.printPurchaseCount(count); // 구매 갯수 메세지 출력
-        for (int i = 0; i < count; i++) {
-            List<Integer> number = Lotto.getLottoNumber();
-            OutputView.printLottoNumber(number); // 한 장의 로또 번호 6개 출력
-        }
+
+        return count;
+    }
+
+    private List<Integer> printPurchaseResult() {
+        List<Integer> number = Lotto.getLottoNumber();
+        OutputView.printLottoNumber(number); // 한 장의 로또 번호 6개 출력
+
+        return number;
     }
 
     // 구매 갯수 계산 메소드
