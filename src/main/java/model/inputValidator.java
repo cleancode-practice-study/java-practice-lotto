@@ -2,7 +2,8 @@ package model;
 
 public class inputValidator {
     private static final String ERROR_COST_MESSAGE = "[ERROR] 로또 한장 당 1000원 입니다.\n1000원 이상, 1000원 단위로 입력해 주세요. \n";
-    private static final String ERROR_BONUS_NUMBER_MESSAGE = "[ERROR] 1~45 사이의 보너스 숫자를 입력해 주세요. ";
+    private static final String ERROR_BONUS_NUMBER_MESSAGE = "[ERROR] 1~45 사이의 보너스 숫자를 입력해 주세요. \n";
+    private static final String ERROR_WINNING_NUMBER_LENGTH_MESSAGE = "[ERROR] 6개의 당첨 번호를 입력해 주세요. \n";
     private static final int MIN_LOTTO_COST = 1000;
     private static final int MIN_RANDOM_NUMBER = 1;
     private static final int MAX_RANDOM_NUMBER = 45;
@@ -46,4 +47,14 @@ public class inputValidator {
         return check;
     }
 
+    // 당첨 번호 split 최대 6개
+    public static boolean isValidateWinningNumberLength(String[] winningNumbers) {
+        boolean check = true;
+
+        if (winningNumbers.length != 6) {
+            System.out.println(ERROR_WINNING_NUMBER_LENGTH_MESSAGE);
+            check = false;
+        }
+        return check;
+    }
 }
