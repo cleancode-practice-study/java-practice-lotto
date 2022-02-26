@@ -1,6 +1,7 @@
 package controller;
 
 import model.Lotto;
+import model.Rank;
 import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
@@ -16,14 +17,10 @@ public class LottoGameController {
         List<Lotto> userNumbers = createUserLotto();
         System.out.println("");
 
-        Lotto numbers = inputLastWeekNumber(); // 지난 주 당첨번호 입력
-        int bonusNumber = inputLastWeekBonusNumber(); // 지난 주 보너스 번호 입력
-
-        WinningLotto winningLotto = new WinningLotto(numbers, bonusNumber);
-
-        System.out.println(winningLotto.match(userNumbers.get(0)));
-
-        printWinningStatisticsResult(numbers, userNumbers);
+        WinningLotto winningLotto = inputLastWeekNumber(); // 지난 주 당첨번호 입력
+        Rank rank = winningLotto.match(userNumbers.get(0));
+        System.out.println(rank);
+        // printWinningStatisticsResult(numbers, userNumbers);
     }
 
     // 구매 금액 입력
@@ -85,22 +82,18 @@ public class LottoGameController {
     }
 
     // 지난 주 당첨 번호 입력
-    private Lotto inputLastWeekNumber() {
-        String lottoNumber = InputView.inputLastWeekWinningNumber();
+    private WinningLotto inputLastWeekNumber() {
+        String lottoNumber = InputView.inputLastWeekWinningNumber(); // 지난주 당첨번호 입력
+        int bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
 
-        String[] number = splitLastWeekNumber(lottoNumber);
-        List<Integer> numbers = new ArrayList(Arrays.asList(number));
-        Lotto winningLotto = new Lotto(numbers);
+        String[] number = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
+        List<Integer> numbers = new ArrayList(Arrays.asList(number)); // List로 변환
+
+        Lotto lastWeekNumber = new Lotto(numbers); // 로또 티켓 생성
+
+        WinningLotto winningLotto = new WinningLotto(lastWeekNumber, bonusNumber);
 
         return winningLotto;
-    }
-
-    // 지난 주 보너스 번호 입력
-    private int inputLastWeekBonusNumber() {
-        int bonusNumber = InputView.inputBonusBallNumber();
-        System.out.println("");
-
-        return bonusNumber;
     }
 
     private void getStatistics(Lotto winningNumber, Lotto userNumber) {
