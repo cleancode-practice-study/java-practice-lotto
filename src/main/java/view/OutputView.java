@@ -1,5 +1,6 @@
 package view;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class OutputView {
@@ -11,12 +12,12 @@ public class OutputView {
         System.out.println(userLottoNumber);
     }
 
-    public static void printWinningStatisticsResult() {
+    public static void printWinningStatisticsResult(HashMap winningStatistics) {
         System.out.println("당첨 통계\n--------------");
-        System.out.println("3개 일치 (5,000원) - ");
-        System.out.println("4개 일치 (50,000원) - ");
-        System.out.println("5개 일치 (1,500,000원) - ");
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - ");
+        System.out.println("3개 일치 (5,000원) - " + winningStatistics.get(3));
+        System.out.println("4개 일치 (50,000원) - " + winningStatistics.get(4));
+        System.out.println("5개 일치 (1,500,000원) - " + winningStatistics.get(5));
+        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winningStatistics.get(6));
     }
 
     public static void printTotalYield(int yield) {

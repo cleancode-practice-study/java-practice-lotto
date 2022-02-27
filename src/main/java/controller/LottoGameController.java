@@ -8,6 +8,7 @@ import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static model.InputValidator.*;
@@ -20,9 +21,10 @@ public class LottoGameController {
         List<Lotto> userLottoes = createUserLotto();
         WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
-        getTotalMatchCountStatistics(winningLotto, userLottoes);
+        List<Integer> matchCounts = getTotalMatchCountList(winningLotto, userLottoes);
+        HashMap winningStatistics = getWinningStatistics(matchCounts);
 
-        // printWinningStatisticsResult();
+        printWinningStatisticsResult(winningStatistics);
     }
 
     // 구매 금액 입력
@@ -127,7 +129,8 @@ public class LottoGameController {
         return winningLotto;
     }
 
-    private List<Integer> getTotalMatchCountStatistics(WinningLotto winningLotto, List<Lotto> userLottoes) {
+    // 사용자 로또 번호와 당첨 로또 번호의 일치하는 갯수들을 담은 list.
+    private List<Integer> getTotalMatchCountList(WinningLotto winningLotto, List<Lotto> userLottoes) {
         List<Integer> matchCounts = new ArrayList<>();
 
         for (int i = 0; i < userLottoes.size(); i++) {
@@ -144,9 +147,22 @@ public class LottoGameController {
         return matchCounts;
     }
 
+    // 당첨 통계내는 메소드
+    private HashMap getWinningStatistics(List<Integer> matchCounts) {
+        int[] count = matchCounts.stream().mapToInt(Integer::intValue).toArray();
+
+        HashMap<Integer, Integer> statistics = new HashMap<>();
+
+        for (int match : count)
+            statistics.put(match, statistics.getOrDefault(match, 0) + 1);
+
+        System.out.println("통계 : " + statistics);
+        return statistics;
+    }
+
     // 당첨 통계 출력
-    private void printWinningStatisticsResult(List<Integer> match, int winningMoney) {
-        OutputView.printWinningStatisticsResult();
+    private void printWinningStatisticsResult(HashMap winningStatistics) {
+        OutputView.printWinningStatisticsResult(winningStatistics);
         // OutputView.printYield(yield);
     }
 }
