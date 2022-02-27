@@ -20,7 +20,7 @@ public class LottoGameController {
         List<Lotto> userLottoes = createUserLotto();
         WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
-        getStatistics(winningLotto, userLottoes);
+        getTotalMatchCountStatistics(winningLotto, userLottoes);
 
         // printWinningStatisticsResult();
     }
@@ -108,6 +108,7 @@ public class LottoGameController {
 
         do {
             bonusNumber = InputView.inputBonusBallNumber(); // 지난주 보너스번호 입력
+            System.out.println("");
         } while (!(isValidateBonusNumber(bonusNumber)));
 
         return bonusNumber;
@@ -126,16 +127,21 @@ public class LottoGameController {
         return winningLotto;
     }
 
-    // 당첨 금액구하기
-    // 몇개 일치하는지 String 배열에 담아서 HashMap의 getOfDefault()로 통계내기
-
-    private void getStatistics(WinningLotto winningLotto, List<Lotto> userLottoes) {
-        int totalWinningMoney = 0;
+    private List<Integer> getTotalMatchCountStatistics(WinningLotto winningLotto, List<Lotto> userLottoes) {
+        List<Integer> matchCounts = new ArrayList<>();
 
         for (int i = 0; i < userLottoes.size(); i++) {
             Rank rank = winningLotto.match(userLottoes.get(i));
-            totalWinningMoney += rank.getWinningMoney();
+            System.out.println("3개 미만이면 MISS: " + rank);
+            System.out.println("");
+
+            if (rank != Rank.MISS) {
+                int num = rank.getCountOfMatch();
+                matchCounts.add(num);
+            }
         }
+
+        return matchCounts;
     }
 
     // 당첨 통계 출력

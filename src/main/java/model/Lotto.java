@@ -13,10 +13,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumber() {
-        return numbers;
-    }
-
     public static List<Integer> getRandomNumber() {
         List<Integer> numbers = new ArrayList<>();
 
@@ -26,6 +22,37 @@ public class Lotto {
         }
 
         return numbers;
-	}
+    }
+
+    public List<Integer> getNumber() {
+        return this.numbers;
+    }
+
+    // 당첨 번호와 사용자 로또 번호가 일치하는 숫자가 몇개인지 반환
+    public int getCountOfMatch(Lotto winningLotto) {
+        List<Integer> user = numbers;
+        List<Integer> winning = new ArrayList<>();
+
+        winning.add(18);
+        winning.add(44);
+        winning.add(30);
+        winning.add(15);
+        winning.add(5);
+        winning.add(21);
+
+        System.out.println(user);
+        System.out.println(winning);
+
+        user.retainAll(winning);
+
+        System.out.println("일치하는 갯수: " + user.size());
+
+        return user.size();
+    }
+
+    // 보너스 번호를 포함하고 있는지 true/false 반환
+    public boolean getMatchBonus(int bonusNo) {
+        return numbers.contains(bonusNo);
+    }
 
 }
