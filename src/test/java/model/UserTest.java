@@ -32,20 +32,4 @@ public class UserTest {
         //then
         assertThat(amount).isEqualTo(5);
     }
-
-    @Test
-    void 총_수익률_test() {
-        //given
-        User user = new User();
-        double winningMoney = 5000;
-        int amount = 3;
-
-        //when
-        double totalYield = user.getTotalYield(winningMoney, amount);
-
-        //then
-        assertThat(totalYield).isEqualTo(1.6666666666666667);
-    }
-
-
 }
