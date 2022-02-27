@@ -131,10 +131,10 @@ public class LottoGameController {
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
         HashMap<Rank, Integer> statistics = initHashMap();
 
-        findMatchRank(userLotto, winningLotto, statistics);
+        checkMatch(userLotto, winningLotto, statistics);
 
         int winningMoney = getTotalWinningMoney(statistics);
-        double yield = getYield(winningMoney, userLotto);
+        double yield = getTotalYield(winningMoney, userLotto);
 
         OutputView.printWinningStatisticsResult(statistics);
         OutputView.printTotalYield(yield);
@@ -154,7 +154,7 @@ public class LottoGameController {
     }
 
     // 하나의 로또 매치 시켜가면서 당첨 통계를 구한다
-    private void findMatchRank(List<Lotto> userLotto, WinningLotto winningLotto, HashMap<Rank, Integer> statistics) {
+    private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, HashMap<Rank, Integer> statistics) {
         for (Lotto lotto : userLotto) {
             Rank rank = winningLotto.match(lotto);
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
@@ -164,16 +164,14 @@ public class LottoGameController {
     private int getTotalWinningMoney(HashMap<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
 
-        totalWinningMoney += Rank.FIFTH.getWinningMoney() * statistics.get(Rank.FIFTH);
-        totalWinningMoney += Rank.THIRD.getWinningMoney() * statistics.get(Rank.THIRD);
-        totalWinningMoney += Rank.FOURTH.getWinningMoney() * statistics.get(Rank.FOURTH);
-        totalWinningMoney += Rank.SECOND.getWinningMoney() * statistics.get(Rank.SECOND);
-        totalWinningMoney += Rank.FIRST.getWinningMoney() * statistics.get(Rank.FIRST);
+        for (Rank rank : Rank.values())
+            totalWinningMoney += rank.getWinningMoney() * statistics.get(rank);
 
         return totalWinningMoney;
     }
 
-    private double getYield(int winningMoney, List<Lotto> userLotto) {
+    // 총 수익률
+    private double getTotalYield(int winningMoney, List<Lotto> userLotto) {
         return (double) winningMoney / (double) (userLotto.size() * LOTTO_TICKET_PRICE);
     }
 }
