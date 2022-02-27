@@ -75,7 +75,7 @@ public class LottoGameController {
     }
 
     // 구매 갯수 계산 메소드
-    private int calculateCount(int cost) {
+    public int calculateCount(int cost) {
         int count = cost / LOTTO_TICKET_PRICE;
 
         return count;

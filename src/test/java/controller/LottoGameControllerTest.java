@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class LottoGameControllerTest {
     @Test
-    void 사용자가_구매한_랜덤_로또_갯수() {
+    void 랜덤_로또_생성() {
         //given
         LottoGameController controller = new LottoGameController();
         int count = 5;
@@ -20,6 +20,19 @@ public class LottoGameControllerTest {
 
         //then
         assertThat(lotto.size()).isEqualTo(5);
+    }
+
+    @Test
+    void 사용자가_구매한_로또_갯수_계산() {
+        //given
+        LottoGameController controller = new LottoGameController();
+        int cost = 5000;
+
+        //when
+        int amount = controller.calculateCount(cost);
+
+        //then
+        assertThat(amount).isEqualTo(5);
     }
 
     @Test
