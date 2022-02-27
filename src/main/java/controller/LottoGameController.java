@@ -144,16 +144,14 @@ public class LottoGameController {
     private HashMap<Rank, Integer> initHashMap() {
         HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
-        lottoResult.put(Rank.FIFTH, 0);
-        lottoResult.put(Rank.FOURTH, 0);
-        lottoResult.put(Rank.THIRD, 0);
-        lottoResult.put(Rank.SECOND, 0);
-        lottoResult.put(Rank.FIRST, 0);
+        for (Rank rank : Rank.values()) {
+            lottoResult.put(rank, 0);
+        }
 
         return lottoResult;
     }
 
-    // 하나의 로또 매치 시켜가면서 당첨 통계를 구한다
+    // 당첨 통계
     private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, HashMap<Rank, Integer> statistics) {
         for (Lotto lotto : userLotto) {
             Rank rank = winningLotto.match(lotto);
@@ -161,6 +159,7 @@ public class LottoGameController {
         }
     }
 
+    // 총 당첨금액
     private int getTotalWinningMoney(HashMap<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
 
