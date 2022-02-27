@@ -1,13 +1,9 @@
 package controller;
 
-import model.Lotto;
-import model.Rank;
-import model.User;
-import model.WinningLotto;
+import model.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,28 +55,18 @@ public class LottoGameController {
 
     // 당첨 통계 출력
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = initHashMap();
+        Map<Rank, Integer> statistics = Statistics.initHashMap();
 
         checkMatch(userLotto, winningLotto, statistics);
 
-        int winningMoney = User.getTotalWinningMoney(statistics);
+        int winningMoney = Statistics.getTotalWinningMoney(statistics);
         int amount = userLotto.size();
-        double yield = User.getTotalYield(winningMoney, amount);
+        double yield = Statistics.getTotalYield(winningMoney, amount);
 
         OutputView.printWinningStatisticsResult(statistics);
         OutputView.printTotalYield(yield);
     }
 
-    // HashMap 초기화
-    private Map<Rank, Integer> initHashMap() {
-        Map<Rank, Integer> lottoResult = new HashMap<>();
-
-        for (Rank rank : Rank.values()) {
-            lottoResult.put(rank, 0);
-        }
-
-        return lottoResult;
-    }
 
     // 당첨 통계
     private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
