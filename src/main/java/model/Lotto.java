@@ -35,6 +35,7 @@ public class Lotto {
 
         List<Integer> winning = new ArrayList<>();
 
+        // 오류 해결 부분
         for (int i = 0; i < winningNumber.size(); i++) {
             winning.add(Integer.valueOf(String.valueOf(winningNumber.get(i))));
         }

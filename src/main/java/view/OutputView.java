@@ -37,6 +37,7 @@ public class OutputView {
 
     public static void printTotalYield(double yield) {
         DecimalFormat form = new DecimalFormat("#,##0.00");
+
         System.out.println(TOTAL_YIELD_MESSAGE + form.format(yield) + PREPOSITIONAL_PARTICLE_FOR_VERB_MESSAGE);
     }
 }
