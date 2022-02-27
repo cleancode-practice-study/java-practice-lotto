@@ -19,12 +19,9 @@ public class LottoGameController {
     HashMap<Rank, Integer> statistics = initHashMap();
 
     public void play() {
-        List<Lotto> userLottoes = createUserLotto();
-        WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
-
-        int winningMoney = getTotalWinningMoney(winningLotto, userLottoes);
-        double yield = (double) winningMoney / (double) (userLottoes.size() * LOTTO_TICKET_PRICE);
-        printWinningStatistics(statistics, yield);
+        List<Lotto> userLottoes = createUserLotto(); // 사용자 로또 생성
+        WinningLotto winningLotto = createWinningLotto(); // 당첨 로또 생성
+        printWinningStatistics(winningLotto, userLottoes, statistics);
     }
 
     // 구매 금액 입력
@@ -156,8 +153,15 @@ public class LottoGameController {
         return lottoResult;
     }
 
+    private double getYield(int winningMoney, List<Lotto> userLottoes) {
+        return (double) winningMoney / (double) (userLottoes.size() * LOTTO_TICKET_PRICE);
+    }
+
     // 당첨 통계 출력
-    private void printWinningStatistics(HashMap winningStatistics, double yield) {
+    private void printWinningStatistics(WinningLotto winningLotto, List<Lotto> userLottoes, HashMap winningStatistics) {
+        int winningMoney = getTotalWinningMoney(winningLotto, userLottoes);
+        double yield = getYield(winningMoney, userLottoes);
+
         OutputView.printWinningStatisticsResult(winningStatistics);
         OutputView.printTotalYield(yield);
     }
