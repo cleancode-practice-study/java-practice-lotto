@@ -132,7 +132,8 @@ public class LottoGameController {
         checkMatch(userLotto, winningLotto, statistics);
 
         int winningMoney = getTotalWinningMoney(statistics);
-        double yield = getTotalYield(winningMoney, userLotto);
+        int amount = userLotto.size();
+        double yield = getTotalYield(winningMoney, amount);
 
         OutputView.printWinningStatisticsResult(statistics);
         OutputView.printTotalYield(yield);
@@ -172,8 +173,8 @@ public class LottoGameController {
     }
 
     // 총 수익률
-    private double getTotalYield(double winningMoney, List<Lotto> userLotto) {
-        double amountPaid = (userLotto.size() * LOTTO_TICKET_PRICE);
+    public double getTotalYield(double winningMoney, int amount) {
+        double amountPaid = (amount * LOTTO_TICKET_PRICE);
         double yield = winningMoney / amountPaid;
 
         return yield;
