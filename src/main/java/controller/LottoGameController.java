@@ -16,14 +16,15 @@ import static model.InputValidator.*;
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int LOTTO_MIN_RANDOM_NUMBER = 1;
+    HashMap<Rank, Integer> statistics = initHashMap();
 
     public void play() {
         List<Lotto> userLottoes = createUserLotto();
         WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
-        HashMap winningStatistics = getWinningStatistics(getTotalMatchCountList(winningLotto, userLottoes));
-
-        printWinningStatisticsResult(winningStatistics);
+        int winningMoney = getTotalWinningMoney(winningLotto, userLottoes);
+        double yield = (double) winningMoney / (double) (userLottoes.size() * LOTTO_TICKET_PRICE);
+        printWinningStatistics(statistics, yield);
     }
 
     // 구매 금액 입력
@@ -128,64 +129,36 @@ public class LottoGameController {
         return winningLotto;
     }
 
+    // 하나의 로또 매치 시켜가면서 그에 따른 당첨 금액과 당첨 통계를 구한다
     private int getTotalWinningMoney(WinningLotto winningLotto, List<Lotto> userLottoes) {
         int totalWinningMoney = 0;
 
-        for (int i = 0; i < userLottoes.size(); i++) {
-            Rank rank = winningLotto.match(userLottoes.get(i));
+        for (Lotto lotto : userLottoes) {
+            Rank rank = winningLotto.match(lotto);
+            totalWinningMoney += rank.getWinningMoney();
 
-            if (rank != Rank.MISS) {
-                totalWinningMoney += rank.getWinningMoney();
-            }
+            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
+
+        // System.out.println("통계:" + statistics);
+
         return totalWinningMoney;
     }
 
-    // 사용자 로또 번호와 당첨 로또 번호의 일치하는 갯수들을 담은 list.
-    private List<Integer> getTotalMatchCountList(WinningLotto winningLotto, List<Lotto> userLottoes) {
-        List<Integer> matchCounts = new ArrayList<>();
+    private HashMap<Rank, Integer> initHashMap() {
+        HashMap<Rank, Integer> lottoResult = new HashMap<>();
 
-        for (int i = 0; i < userLottoes.size(); i++) {
-            Rank rank = winningLotto.match(userLottoes.get(i));
-
-            if (rank != Rank.MISS) {
-                matchCounts.add(rank.getCountOfMatch());
-            }
-        }
-        return matchCounts;
-    }
-
-    // 당첨 통계내는 메소드
-    private HashMap getWinningStatistics(List<Integer> matchCounts) {
-        int[] count = matchCounts.stream().mapToInt(Integer::intValue).toArray();
-
-        HashMap<Integer, Integer> statistics = initHashMap();
-
-        for (int match : count)
-            statistics.put(match, statistics.getOrDefault(match, 0) + 1);
-
-        System.out.println("통계 : " + statistics);
-        return statistics;
-    }
-
-    private HashMap<Integer, Integer> initHashMap() {
-        HashMap<Integer, Integer> lottoResult = new HashMap<>();
-
-        lottoResult.put(3, 0);
-        lottoResult.put(4, 0);
-        lottoResult.put(5, 0);
-        lottoResult.put(6, 0);
+        lottoResult.put(Rank.FIFTH, 0);
+        lottoResult.put(Rank.FOURTH, 0);
+        lottoResult.put(Rank.SECOND, 0);
+        lottoResult.put(Rank.FIRST, 0);
 
         return lottoResult;
     }
 
-    private void getTotalWinningMoney() {
-
-    }
-
     // 당첨 통계 출력
-    private void printWinningStatisticsResult(HashMap winningStatistics) {
+    private void printWinningStatistics(HashMap winningStatistics, double yield) {
         OutputView.printWinningStatisticsResult(winningStatistics);
-        // OutputView.printTotalYield(yield);
+        OutputView.printTotalYield(yield);
     }
 }
