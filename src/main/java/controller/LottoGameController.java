@@ -6,10 +6,7 @@ import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static model.InputValidator.*;
 
@@ -130,7 +127,7 @@ public class LottoGameController {
 
     // 당첨 통계 출력
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
-        HashMap<Rank, Integer> statistics = initHashMap();
+        Map<Rank, Integer> statistics = initHashMap();
 
         checkMatch(userLotto, winningLotto, statistics);
 
@@ -142,8 +139,8 @@ public class LottoGameController {
     }
 
     // HashMap 초기화
-    private HashMap<Rank, Integer> initHashMap() {
-        HashMap<Rank, Integer> lottoResult = new HashMap<>();
+    private Map<Rank, Integer> initHashMap() {
+        Map<Rank, Integer> lottoResult = new HashMap<>();
 
         for (Rank rank : Rank.values()) {
             lottoResult.put(rank, 0);
@@ -153,7 +150,7 @@ public class LottoGameController {
     }
 
     // 당첨 통계
-    private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, HashMap<Rank, Integer> statistics) {
+    private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
         for (Lotto lotto : userLotto) {
             Rank rank = winningLotto.match(lotto);
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
@@ -161,7 +158,7 @@ public class LottoGameController {
     }
 
     // 총 당첨금액
-    private int getTotalWinningMoney(HashMap<Rank, Integer> statistics) {
+    private int getTotalWinningMoney(Map<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
 
         for (Rank rank : Rank.values()) {

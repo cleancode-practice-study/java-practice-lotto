@@ -3,8 +3,8 @@ package view;
 import model.Rank;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String PURCHASE_INFORMATION_MESSAGE = "개를 구매했습니다.";
@@ -26,7 +26,7 @@ public class OutputView {
         System.out.println(lottoNumber);
     }
 
-    public static void printWinningStatisticsResult(HashMap winningStatistics) {
+    public static void printWinningStatisticsResult(Map<Rank, Integer> winningStatistics) {
         System.out.println(WINNING_STATISTICS_INFORMATION_MESSAGE);
         System.out.println(FIFTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FIFTH) + LOTTO_UNIT);
         System.out.println(FOURTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FOURTH) + LOTTO_UNIT);
