@@ -1,14 +1,11 @@
 package model;
 
-import view.InputView;
-import view.OutputView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static controller.LottoGameController.getPurchaseAmount;
 import static controller.LottoGameController.printUserLottoNumber;
-import static model.InputValidator.isValidateCost;
 
 public class User {
     private static final int LOTTO_TICKET_PRICE = 1000;
@@ -33,28 +30,6 @@ public class User {
         return userLotto;
     }
 
-    // 구매 갯수 반환
-    private static int getPurchaseAmount() {
-        int cost = inputCost();
-        int amount = calculateCount(cost); // 구매 갯수 계산
-
-        OutputView.printPurchaseAmountMessage(amount); // 구매 갯수 메세지 출력
-
-        return amount;
-    }
-
-    // 구매 금액 입력
-    private static int inputCost() {
-        int cost = LOTTO_TICKET_PRICE;
-
-        do {
-            cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
-        } while (!(isValidateCost(cost)));
-
-        System.out.println("");
-
-        return cost;
-    }
 
     // 구매 갯수 계산 메소드
     public static int calculateCount(int cost) {
