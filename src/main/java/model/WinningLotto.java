@@ -10,7 +10,7 @@ public class WinningLotto {
     }
 
     public Rank match(Lotto userLotto) {
-        return Rank.valueOf(userLotto.getCountOfMatch(lotto), userLotto.getMatchBonus(bonusNo));
+        return Rank.valueOf(userLotto.getCountOfMatch(this.lotto), userLotto.getMatchBonus(this.bonusNo));
     }
 
 }

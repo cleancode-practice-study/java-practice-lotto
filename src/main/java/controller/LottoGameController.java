@@ -86,11 +86,10 @@ public class LottoGameController {
 
     // 당첨 로또 생성
     private WinningLotto createWinningLotto() {
-        String[] winningNumber = inputWinningNumber();
+        List<Integer> winningNumber = inputWinningNumber();
         int bonusNumber = inputBonusNumber();
 
-        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber)); // List로 변환
-        Lotto lotto = new Lotto(winningNumbers); // 로또 티켓 생성
+        Lotto lotto = new Lotto(winningNumber); // 로또 티켓 생성
 
         WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
 
@@ -98,7 +97,7 @@ public class LottoGameController {
     }
 
     // 지난 주 당첨 번호 입력
-    private String[] inputWinningNumber() {
+    private List<Integer> inputWinningNumber() {
         String[] winningNumber = new String[6];
 
         do {
@@ -107,7 +106,9 @@ public class LottoGameController {
         }
         while (!(isValidateWinningNumberLength(winningNumber)));
 
-        return winningNumber;
+        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
+
+        return winningNumbers;
     }
 
     // 지난 주 당첨번호 String > String[] 스플릿

@@ -31,21 +31,15 @@ public class Lotto {
     // 당첨 번호와 사용자 로또 번호가 일치하는 숫자가 몇개인지 반환
     public int getCountOfMatch(Lotto winningLotto) {
         List<Integer> user = numbers;
+        List<Integer> winningNumber = winningLotto.getNumber();
+
         List<Integer> winning = new ArrayList<>();
 
-        winning.add(18);
-        winning.add(44);
-        winning.add(30);
-        winning.add(15);
-        winning.add(5);
-        winning.add(21);
-
-//        System.out.println(user);
-//        System.out.println(winning);
+        for (int i = 0; i < winningNumber.size(); i++) {
+            winning.add(Integer.valueOf(String.valueOf(winningNumber.get(i))));
+        }
 
         user.retainAll(winning);
-
-//        System.out.println("일치하는 갯수: " + user.size());
 
         return user.size();
     }
