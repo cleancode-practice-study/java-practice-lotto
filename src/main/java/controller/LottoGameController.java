@@ -164,14 +164,21 @@ public class LottoGameController {
     private int getTotalWinningMoney(HashMap<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
 
-        for (Rank rank : Rank.values())
-            totalWinningMoney += rank.getWinningMoney() * statistics.get(rank);
+        for (Rank rank : Rank.values()) {
+            int winningMoney = rank.getWinningMoney();
+            int amount = statistics.get(rank);
+
+            totalWinningMoney += winningMoney * amount;
+        }
 
         return totalWinningMoney;
     }
 
     // 총 수익률
-    private double getTotalYield(int winningMoney, List<Lotto> userLotto) {
-        return (double) winningMoney / (double) (userLotto.size() * LOTTO_TICKET_PRICE);
+    private double getTotalYield(double winningMoney, List<Lotto> userLotto) {
+        double amountPaid = (userLotto.size() * LOTTO_TICKET_PRICE);
+        double yield = winningMoney / amountPaid;
+
+        return yield;
     }
 }
