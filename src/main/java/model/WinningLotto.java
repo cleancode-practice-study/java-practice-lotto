@@ -1,6 +1,16 @@
 package model;
 
+import view.InputView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static model.InputValidator.isValidateBonusNumber;
+import static model.InputValidator.isValidateWinningNumberLength;
+
 public class WinningLotto {
+    private static final int LOTTO_MIN_RANDOM_NUMBER = 1;
     private final Lotto lotto;
     private final int bonusNo;
 
@@ -14,6 +24,50 @@ public class WinningLotto {
         boolean matchBonus = userLotto.getMatchBonus(bonusNo);
 
         return Rank.valueOf(countOfMatch, matchBonus);
+    }
+
+    // 당첨 로또 생성
+    public static WinningLotto createWinningLotto() {
+        List<Integer> winningNumber = inputWinningNumber();
+        int bonusNumber = inputBonusNumber();
+
+        Lotto lotto = new Lotto(winningNumber); // 로또 티켓 생성
+
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+
+        return winningLotto;
+    }
+
+    // 지난 주 당첨 번호 입력
+    private static List<Integer> inputWinningNumber() {
+        String[] winningNumber = new String[6];
+
+        do {
+            String lottoNumber = InputView.inputWinningNumber(); // 지난주 당첨번호 입력
+            winningNumber = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
+        }
+        while (!(isValidateWinningNumberLength(winningNumber)));
+
+        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
+
+        return winningNumbers;
+    }
+
+    // 지난 주 당첨번호 String > String[] 스플릿
+    public static String[] splitLastWeekNumber(String number) {
+        return number.split(",");
+    }
+
+    // 지난 주 보너스 번호 입력
+    private static int inputBonusNumber() {
+        int bonusNumber = LOTTO_MIN_RANDOM_NUMBER;
+
+        do {
+            bonusNumber = InputView.inputBonusNumber();
+            System.out.println("");
+        } while (!(isValidateBonusNumber(bonusNumber)));
+
+        return bonusNumber;
     }
 
 }

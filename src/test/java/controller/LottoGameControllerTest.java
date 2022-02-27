@@ -1,6 +1,5 @@
 package controller;
 
-
 import model.Lotto;
 import org.junit.jupiter.api.Test;
 
