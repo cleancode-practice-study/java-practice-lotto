@@ -40,12 +40,12 @@ public class Lotto {
         winning.add(5);
         winning.add(21);
 
-        System.out.println(user);
-        System.out.println(winning);
+//        System.out.println(user);
+//        System.out.println(winning);
 
         user.retainAll(winning);
 
-        System.out.println("일치하는 갯수: " + user.size());
+//        System.out.println("일치하는 갯수: " + user.size());
 
         return user.size();
     }

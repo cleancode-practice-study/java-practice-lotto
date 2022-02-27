@@ -21,8 +21,7 @@ public class LottoGameController {
         List<Lotto> userLottoes = createUserLotto();
         WinningLotto winningLotto = createWinningLotto(); // 지난 주 당첨번호 입력
 
-        List<Integer> matchCounts = getTotalMatchCountList(winningLotto, userLottoes);
-        HashMap winningStatistics = getWinningStatistics(matchCounts);
+        HashMap winningStatistics = getWinningStatistics(getTotalMatchCountList(winningLotto, userLottoes));
 
         printWinningStatisticsResult(winningStatistics);
     }
@@ -129,21 +128,30 @@ public class LottoGameController {
         return winningLotto;
     }
 
+    private int getTotalWinningMoney(WinningLotto winningLotto, List<Lotto> userLottoes) {
+        int totalWinningMoney = 0;
+
+        for (int i = 0; i < userLottoes.size(); i++) {
+            Rank rank = winningLotto.match(userLottoes.get(i));
+
+            if (rank != Rank.MISS) {
+                totalWinningMoney += rank.getWinningMoney();
+            }
+        }
+        return totalWinningMoney;
+    }
+
     // 사용자 로또 번호와 당첨 로또 번호의 일치하는 갯수들을 담은 list.
     private List<Integer> getTotalMatchCountList(WinningLotto winningLotto, List<Lotto> userLottoes) {
         List<Integer> matchCounts = new ArrayList<>();
 
         for (int i = 0; i < userLottoes.size(); i++) {
             Rank rank = winningLotto.match(userLottoes.get(i));
-            System.out.println("3개 미만이면 MISS: " + rank);
-            System.out.println("");
 
             if (rank != Rank.MISS) {
-                int num = rank.getCountOfMatch();
-                matchCounts.add(num);
+                matchCounts.add(rank.getCountOfMatch());
             }
         }
-
         return matchCounts;
     }
 
@@ -151,7 +159,7 @@ public class LottoGameController {
     private HashMap getWinningStatistics(List<Integer> matchCounts) {
         int[] count = matchCounts.stream().mapToInt(Integer::intValue).toArray();
 
-        HashMap<Integer, Integer> statistics = new HashMap<>();
+        HashMap<Integer, Integer> statistics = initHashMap();
 
         for (int match : count)
             statistics.put(match, statistics.getOrDefault(match, 0) + 1);
@@ -160,9 +168,24 @@ public class LottoGameController {
         return statistics;
     }
 
+    private HashMap<Integer, Integer> initHashMap() {
+        HashMap<Integer, Integer> lottoResult = new HashMap<>();
+
+        lottoResult.put(3, 0);
+        lottoResult.put(4, 0);
+        lottoResult.put(5, 0);
+        lottoResult.put(6, 0);
+
+        return lottoResult;
+    }
+
+    private void getTotalWinningMoney() {
+
+    }
+
     // 당첨 통계 출력
     private void printWinningStatisticsResult(HashMap winningStatistics) {
         OutputView.printWinningStatisticsResult(winningStatistics);
-        // OutputView.printYield(yield);
+        // OutputView.printTotalYield(yield);
     }
 }
