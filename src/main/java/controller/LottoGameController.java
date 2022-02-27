@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public class LottoGameController {
+    public void play() {
+        List<Lotto> userLotto = User.createUserLotto(); // 사용자 로또 생성
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
+        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
+    }
+
     // 사용자 총 로또 리스트 출력
     public static void printUserLottoNumber(List<Lotto> userLotto) {
         for (Lotto lotto : userLotto) {
@@ -20,12 +26,6 @@ public class LottoGameController {
         }
 
         System.out.println("");
-    }
-
-    public void play() {
-        List<Lotto> userLotto = User.createUserLotto(); // 사용자 로또 생성
-        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
-        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
     }
 
     // 당첨 통계 출력
