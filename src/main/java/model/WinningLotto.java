@@ -19,6 +19,18 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    // 당첨 로또 생성
+    public static WinningLotto createWinningLotto() {
+        List<Integer> winningNumber = inputWinningNumber();
+        int bonusNumber = inputBonusNumber();
+
+        Lotto lotto = new Lotto(winningNumber); // 로또 티켓 생성
+
+        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
+
+        return winningLotto;
+    }
+
     // 지난 주 당첨 번호 입력
     private static List<Integer> inputWinningNumber() {
         String[] winningNumber = new String[6];
@@ -32,18 +44,6 @@ public class WinningLotto {
         List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
 
         return winningNumbers;
-    }
-
-    // 당첨 로또 생성
-    public static WinningLotto createWinningLotto() {
-        List<Integer> winningNumber = inputWinningNumber();
-        int bonusNumber = inputBonusNumber();
-
-        Lotto lotto = new Lotto(winningNumber); // 로또 티켓 생성
-
-        WinningLotto winningLotto = new WinningLotto(lotto, bonusNumber);
-
-        return winningLotto;
     }
 
     // 지난 주 당첨번호 String > String[] 스플릿

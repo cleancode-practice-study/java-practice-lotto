@@ -1,5 +1,6 @@
 package view;
 
+import model.Lotto;
 import model.Rank;
 
 import java.text.DecimalFormat;
@@ -22,8 +23,12 @@ public class OutputView {
         System.out.println(amount + PURCHASE_INFORMATION_MESSAGE);
     }
 
-    public static void printLottoNumber(List<Integer> lottoNumber) {
-        System.out.println(lottoNumber);
+    public static void printUserLotto(List<Lotto> userLotto) {
+        for (Lotto lotto : userLotto) {
+            List<Integer> lottoNumber = lotto.getNumber();
+            System.out.println(lottoNumber);
+        }
+        System.out.println("");
     }
 
     public static void printWinningStatisticsResult(Map<Rank, Integer> winningStatistics) {

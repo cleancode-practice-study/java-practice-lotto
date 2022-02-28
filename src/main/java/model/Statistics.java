@@ -7,6 +7,17 @@ import java.util.Map;
 public class Statistics {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
+    // 통계 초기화
+    public static Map<Rank, Integer> initStatistics() {
+        Map<Rank, Integer> statistics = new HashMap<>();
+
+        for (Rank rank : Rank.values()) {
+            statistics.put(rank, 0);
+        }
+
+        return statistics;
+    }
+
     // 매치 통계 등록
     public static void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
         for (Lotto lotto : userLotto) {
@@ -35,16 +46,5 @@ public class Statistics {
         double yield = winningMoney / amountPaid;
 
         return yield;
-    }
-
-    // HashMap 초기화
-    public static Map<Rank, Integer> initStatistics() {
-        Map<Rank, Integer> statistics = new HashMap<>();
-
-        for (Rank rank : Rank.values()) {
-            statistics.put(rank, 0);
-        }
-
-        return statistics;
     }
 }

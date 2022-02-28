@@ -9,7 +9,6 @@ import java.util.Map;
 
 import static model.InputValidator.isValidateCost;
 import static model.Statistics.initStatistics;
-import static model.User.calculateCount;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
@@ -33,26 +32,6 @@ public class LottoGameController {
         return cost;
     }
 
-    // 구매 갯수 반환
-    public static int getLottoCount() {
-        int cost = inputCost();
-        int count = calculateCount(cost); // 구매 갯수 계산
-
-        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
-
-        return count;
-    }
-
-    // 사용자 총 로또 리스트 출력
-    public static void printUserLotto(List<Lotto> userLotto) {
-        for (Lotto lotto : userLotto) {
-            List<Integer> lottoNumber = lotto.getNumber();
-
-            OutputView.printLottoNumber(lottoNumber);
-        }
-        System.out.println("");
-    }
-
     // 당첨 통계 결과 출력
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
         Map<Rank, Integer> statistics = initStatistics();
@@ -60,11 +39,10 @@ public class LottoGameController {
         Statistics.registerMatchStatistics(userLotto, winningLotto, statistics);
 
         int winningMoney = Statistics.getTotalWinningMoney(statistics);
-        int amount = userLotto.size();
-        double yield = Statistics.getTotalYield(winningMoney, amount);
+        int count = userLotto.size();
+        double yield = Statistics.getTotalYield(winningMoney, count);
 
         OutputView.printWinningStatisticsResult(statistics);
         OutputView.printTotalYield(yield);
     }
-
 }
