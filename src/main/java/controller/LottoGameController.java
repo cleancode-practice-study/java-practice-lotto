@@ -57,7 +57,7 @@ public class LottoGameController {
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
         Map<Rank, Integer> statistics = initStatistics();
 
-        registerMatchStatistics(userLotto, winningLotto, statistics);
+        Statistics.registerMatchStatistics(userLotto, winningLotto, statistics);
 
         int winningMoney = Statistics.getTotalWinningMoney(statistics);
         int amount = userLotto.size();
@@ -67,11 +67,4 @@ public class LottoGameController {
         OutputView.printTotalYield(yield);
     }
 
-    // 매치 통계 등록
-    private void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
-        for (Lotto lotto : userLotto) {
-            Rank rank = winningLotto.match(lotto);
-            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
-        }
-    }
 }

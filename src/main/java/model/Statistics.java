@@ -1,10 +1,19 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Statistics {
     private static final int LOTTO_TICKET_PRICE = 1000;
+
+    // 매치 통계 등록
+    public static void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
+        for (Lotto lotto : userLotto) {
+            Rank rank = winningLotto.match(lotto);
+            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
+        }
+    }
 
     // 총 당첨금액
     public static int getTotalWinningMoney(Map<Rank, Integer> statistics) {
