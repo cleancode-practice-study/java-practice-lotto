@@ -25,8 +25,10 @@ public class OutputView {
         System.out.println(WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
-    public static void printLottoNumber(Lotto lotto) {
-        System.out.println(lotto.getLottoNum());
+    public static void printLottoNumber(List<Lotto> lottoes) {
+        for (Lotto lotto : lottoes) {
+            System.out.println(lotto.getLottoNum());
+        }
     }
 
     public static void printLottoResult(List<Integer> winningResult) {
