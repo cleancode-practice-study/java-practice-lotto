@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static model.InputValidator.isValidateCost;
+import static model.Statistics.initStatistics;
 import static model.User.calculateCount;
 
 public class LottoGameController {
@@ -33,31 +34,30 @@ public class LottoGameController {
     }
 
     // 구매 갯수 반환
-    public static int getPurchaseAmount() {
+    public static int getLottoCount() {
         int cost = inputCost();
-        int amount = calculateCount(cost); // 구매 갯수 계산
+        int count = calculateCount(cost); // 구매 갯수 계산
 
-        OutputView.printPurchaseAmountMessage(amount); // 구매 갯수 메세지 출력
+        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
 
-        return amount;
+        return count;
     }
 
     // 사용자 총 로또 리스트 출력
-    public static void printUserLottoNumber(List<Lotto> userLotto) {
+    public static void printUserLotto(List<Lotto> userLotto) {
         for (Lotto lotto : userLotto) {
             List<Integer> lottoNumber = lotto.getNumber();
 
             OutputView.printLottoNumber(lottoNumber);
         }
-
         System.out.println("");
     }
 
-    // 당첨 통계 출력
+    // 당첨 통계 결과 출력
     private void printWinningStatisticsResult(List<Lotto> userLotto, WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = Statistics.initHashMap();
+        Map<Rank, Integer> statistics = initStatistics();
 
-        checkMatch(userLotto, winningLotto, statistics);
+        registerMatchStatistics(userLotto, winningLotto, statistics);
 
         int winningMoney = Statistics.getTotalWinningMoney(statistics);
         int amount = userLotto.size();
@@ -67,13 +67,11 @@ public class LottoGameController {
         OutputView.printTotalYield(yield);
     }
 
-
-    // 당첨 통계
-    private void checkMatch(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
+    // 매치 통계 등록
+    private void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
         for (Lotto lotto : userLotto) {
             Rank rank = winningLotto.match(lotto);
             statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
         }
     }
-
 }

@@ -14,22 +14,22 @@ public class Lotto {
     }
 
     public static List<Integer> getRandomNumber() {
-        List<Integer> numbers = new ArrayList<>();
+        List<Integer> randomNumbers = new ArrayList<>();
 
         for (int i = 0; i < LOTTO_TICKET_LENGTH; i++) {
             int number = RandomLottoNumberGenerator.randomLottoNumber(); // 랜덤 로또 번호 생성
-            numbers.add(number);
+            randomNumbers.add(number);
         }
 
-        return numbers;
+        return randomNumbers;
     }
 
     public List<Integer> getNumber() {
         return this.numbers;
     }
 
-    // 당첨 번호와 사용자 로또 번호가 일치하는 숫자가 몇개인지 반환
-    public int getCountOfMatch(Lotto winningLotto) {
+    // 당첨 번호와 사용자 로또 번호 중 일치하는 번호가 몇개인지 반환
+    public int getMatchCount(Lotto winningLotto) {
         List<Integer> user = numbers;
         List<Integer> winningNumber = winningLotto.getNumber();
 
@@ -42,12 +42,13 @@ public class Lotto {
 
         user.retainAll(winning);
 
-        return user.size();
+        int matchCount = user.size();
+
+        return matchCount;
     }
 
     // 보너스 번호를 포함하고 있는지 true/false 반환
-    public boolean getMatchBonus(int bonusNo) {
+    public boolean isContainsBonusNumber(int bonusNo) {
         return numbers.contains(bonusNo);
     }
-
 }

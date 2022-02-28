@@ -12,4 +12,3 @@ public class RandomLottoNumberGenerator {
         return random.nextInt(MAX_RANDOM_NUMBER) + MIN_RANDOM_NUMBER;
     }
 }
-

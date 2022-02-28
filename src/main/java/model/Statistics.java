@@ -29,13 +29,13 @@ public class Statistics {
     }
 
     // HashMap 초기화
-    public static Map<Rank, Integer> initHashMap() {
-        Map<Rank, Integer> lottoResult = new HashMap<>();
+    public static Map<Rank, Integer> initStatistics() {
+        Map<Rank, Integer> statistics = new HashMap<>();
 
         for (Rank rank : Rank.values()) {
-            lottoResult.put(rank, 0);
+            statistics.put(rank, 0);
         }
 
-        return lottoResult;
+        return statistics;
     }
 }

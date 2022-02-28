@@ -19,11 +19,19 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
-    public Rank match(Lotto userLotto) {
-        int countOfMatch = userLotto.getCountOfMatch(lotto);
-        boolean matchBonus = userLotto.getMatchBonus(bonusNo);
+    // 지난 주 당첨 번호 입력
+    private static List<Integer> inputWinningNumber() {
+        String[] winningNumber = new String[6];
 
-        return Rank.valueOf(countOfMatch, matchBonus);
+        do {
+            String lottoNumber = InputView.inputWinningNumber(); // 지난주 당첨번호 입력
+            winningNumber = splitWinningNumber(lottoNumber); // 당첨번호 , 기준으로 split
+        }
+        while (!(isValidateWinningNumberLength(winningNumber)));
+
+        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
+
+        return winningNumbers;
     }
 
     // 당첨 로또 생성
@@ -38,24 +46,16 @@ public class WinningLotto {
         return winningLotto;
     }
 
-    // 지난 주 당첨 번호 입력
-    private static List<Integer> inputWinningNumber() {
-        String[] winningNumber = new String[6];
-
-        do {
-            String lottoNumber = InputView.inputWinningNumber(); // 지난주 당첨번호 입력
-            winningNumber = splitLastWeekNumber(lottoNumber); // 당첨번호 , 기준으로 split
-        }
-        while (!(isValidateWinningNumberLength(winningNumber)));
-
-        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
-
-        return winningNumbers;
+    // 지난 주 당첨번호 String > String[] 스플릿
+    public static String[] splitWinningNumber(String number) {
+        return number.split(",");
     }
 
-    // 지난 주 당첨번호 String > String[] 스플릿
-    public static String[] splitLastWeekNumber(String number) {
-        return number.split(",");
+    public Rank match(Lotto userLotto) {
+        int matchCount = userLotto.getMatchCount(lotto);
+        boolean matchBonus = userLotto.isContainsBonusNumber(bonusNo);
+
+        return Rank.valueOf(matchCount, matchBonus);
     }
 
     // 지난 주 보너스 번호 입력
@@ -69,5 +69,4 @@ public class WinningLotto {
 
         return bonusNumber;
     }
-
 }

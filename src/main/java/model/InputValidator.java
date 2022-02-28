@@ -43,6 +43,7 @@ public class InputValidator {
             System.out.println(ERROR_BONUS_NUMBER_MESSAGE);
             check = false;
         }
+
         return check;
     }
 
@@ -54,6 +55,7 @@ public class InputValidator {
             System.out.println(ERROR_WINNING_NUMBER_LENGTH_MESSAGE);
             check = false;
         }
+
         return check;
     }
 }
