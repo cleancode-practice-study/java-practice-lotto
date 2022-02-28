@@ -1,35 +1,43 @@
 package controller;
 
-import model.*;
-import view.InputView;
+import model.Lotto;
+import model.Rank;
+import model.Statistics;
+import model.WinningLotto;
 import view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static model.InputValidator.isValidateCost;
 import static model.Statistics.initStatistics;
+import static model.User.getLottoCount;
+import static model.User.getRandomLotto;
 
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
-    public void play() {
-        List<Lotto> userLotto = User.createUserLotto(); // 사용자 로또 생성
-        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
-        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
+    // 사용자 로또 생성: 안내 문구 & 구매 결과 출력
+    public static List<Lotto> createUserLotto() {
+        List<Lotto> userLotto = new ArrayList<>();
+        int count = getLottoCount();
+
+        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
+
+        for (int i = 0; i < count; i++) {
+            Lotto lotto = getRandomLotto();
+            userLotto.add(lotto);
+        }
+
+        OutputView.printUserLotto(userLotto); // 사용자가 구매한 로또 번호 출력
+
+        return userLotto;
     }
 
-    // 구매 금액 입력
-    public static int inputCost() {
-        int cost = LOTTO_TICKET_PRICE;
-
-        do {
-            cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
-        } while (!(isValidateCost(cost)));
-
-        System.out.println("");
-
-        return cost;
+    public void play() {
+        List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
+        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
     }
 
     // 당첨 통계 결과 출력

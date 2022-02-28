@@ -1,31 +1,26 @@
 package model;
 
-import view.OutputView;
+import view.InputView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static controller.LottoGameController.inputCost;
+import static model.InputValidator.isValidateCost;
 import static model.Lotto.getRandomNumber;
 
 public class User {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
-    // 사용자 로또 생성
-    public static List<Lotto> createUserLotto() {
-        List<Lotto> userLotto = new ArrayList<>();
-        int count = getLottoCount();
+    // 구매 금액 입력
+    public static int inputCost() {
+        int cost = LOTTO_TICKET_PRICE;
 
-        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
+        do {
+            cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
+        } while (!(isValidateCost(cost)));
 
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = getRandomLotto();
-            userLotto.add(lotto);
-        }
+        System.out.println("");
 
-        OutputView.printUserLotto(userLotto); // 사용자가 구매한 로또 번호 출력
-
-        return userLotto;
+        return cost;
     }
 
     // 사용자 구매 갯수 반환
