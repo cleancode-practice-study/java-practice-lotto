@@ -17,6 +17,12 @@ import static model.User.getRandomLotto;
 public class LottoGameController {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
+    public void play() {
+        List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
+        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
+        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
+    }
+
     // 사용자 로또 생성: 안내 문구 & 구매 결과 출력
     public static List<Lotto> createUserLotto() {
         List<Lotto> userLotto = new ArrayList<>();
@@ -32,12 +38,6 @@ public class LottoGameController {
         OutputView.printUserLotto(userLotto); // 사용자가 구매한 로또 번호 출력
 
         return userLotto;
-    }
-
-    public void play() {
-        List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
-        WinningLotto winningLotto = WinningLotto.createWinningLotto(); // 당첨 로또 생성
-        printWinningStatisticsResult(userLotto, winningLotto); // 당첨 통계 출력
     }
 
     // 당첨 통계 결과 출력
