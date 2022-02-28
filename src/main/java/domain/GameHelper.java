@@ -49,6 +49,18 @@ public class GameHelper {
         return winningLottoNumber;
     }
 
+    public int getLottoTotalMoney(WinningLotto winningLotto, List<Lotto> lottoes) {
+        int totalWinMoney = 0;
+
+        for(Lotto lotto : lottoes) {
+            // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
+            Rank rank = winningLotto.match(lotto);
+            totalWinMoney += rank.getWinningMoney();
+        }
+
+        return totalWinMoney;
+    }
+
     public List<Integer> getLottoResult(WinningLotto winningLotto, List<Lotto> lottoes) {
         Map<Rank, Integer> lottoResult = checkLottoWinCount(winningLotto, lottoes);
 
@@ -81,18 +93,6 @@ public class GameHelper {
         lottoResult.put(Rank.FIRST, 0);
 
         return lottoResult;
-    }
-
-    public int getLottoTotalMoney(WinningLotto winningLotto, List<Lotto> lottoes) {
-        int totalWinMoney = 0;
-
-        for(Lotto lotto : lottoes) {
-            // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
-            Rank rank = winningLotto.match(lotto);
-            totalWinMoney += rank.getWinningMoney();
-        }
-
-        return totalWinMoney;
     }
 
     public List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {

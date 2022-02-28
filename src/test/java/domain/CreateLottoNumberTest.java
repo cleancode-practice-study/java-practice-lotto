@@ -13,9 +13,11 @@ public class CreateLottoNumberTest {
 
     @Test
     public void 랜덤한_숫자_생성() {
-        int lottoNumber = CreateLottoNumber.getRandomNumber(LOTTO_NUM_START_INCLUSIVE, LOTTO_NUM_END_INCLUSIVE);
+        List<Integer> lottoNumbers = CreateLottoNumber.createLottosNumber();
 
-        assertThat(lottoNumber).isBetween(LOTTO_NUM_START_INCLUSIVE, LOTTO_NUM_END_INCLUSIVE);
+        for (int number : lottoNumbers) {
+            assertThat(number).isBetween(LOTTO_NUM_START_INCLUSIVE, LOTTO_NUM_END_INCLUSIVE);
+        }
     }
 
     @Test

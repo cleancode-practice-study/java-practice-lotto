@@ -18,7 +18,7 @@ public class Controller {
 
     // 랜덤 로또 받아서 출력
     private List<Lotto> getLottoes() {
-        GameHelper helper = new GameHelper();
+        domain.GameHelper helper = new domain.GameHelper();
         // 얼마 어치의 로또를 구매할 건지 입력
         int lottoPrice = InputView.inputLottoPurchasePrice();
         int lottoCount = helper.getLottoCount(lottoPrice);
@@ -42,7 +42,7 @@ public class Controller {
 
     // 당첨 로또 받기
     private WinningLotto getWinningLotto() {
-        GameHelper helper = new GameHelper();
+        domain.GameHelper helper = new domain.GameHelper();
 
         String winningNumbers = null;
         boolean isValid = false;
@@ -68,7 +68,7 @@ public class Controller {
 
     // 모델에게 값 받아 로또 당첨 결과 출력
     private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
-        GameHelper helper = new GameHelper();
+        domain.GameHelper helper = new domain.GameHelper();
 
         // 당첨 결과 리스트로 받기 순서대로 [3개 일치, 4개일치, 5개 일치, 5개 + 보너스 일치, 6개 일치 개수]
         List<Integer> winningResult = helper.getLottoResult(winningLotto, lottoes);

@@ -2,7 +2,7 @@ import controller.Controller;
 
 public class Application {
 	public static void main(String[] args) {
-		Controller controller = new Controller();
-		controller.run();
+		Controller gameHelper = new Controller();
+		gameHelper.run();
 	}
 }

@@ -13,13 +13,13 @@ public class CreateLottoNumber {
         Set<Integer> lottosDeduplicated = new HashSet<>();
 
         while (lottosDeduplicated.size() < LOTTO_NUM_PER_ONE_LINE) {
-            lottosDeduplicated.add(getRandomNumber(LOTTO_NUM_START_INCLUSIVE, LOTTO_NUM_END_INCLUSIVE));
+            lottosDeduplicated.add(getRandomNumber());
         }
 
         return new ArrayList<>(lottosDeduplicated);
     }
 
-    public static int getRandomNumber(int start, int end) {
-        return random.nextInt(end) + start;
+    private static int getRandomNumber() {
+        return random.nextInt(LOTTO_NUM_END_INCLUSIVE) + CreateLottoNumber.LOTTO_NUM_START_INCLUSIVE;
     }
 }
