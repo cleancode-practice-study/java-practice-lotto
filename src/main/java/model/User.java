@@ -1,31 +1,13 @@
 package model;
 
-import view.InputView;
-
 import java.util.List;
 
-import static model.InputValidator.isValidateCost;
 import static model.Lotto.getRandomNumber;
 
 public class User {
     private static final int LOTTO_TICKET_PRICE = 1000;
-
-    // 구매 금액 입력
-    private static int inputCost() {
-        int cost = 0;
-
-        do {
-            cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
-        } while (!(isValidateCost(cost)));
-
-        System.out.println("");
-
-        return cost;
-    }
-
     // 사용자 구매 갯수 반환
-    public static int getLottoCount() {
-        int cost = inputCost();
+    public static int getLottoCount(int cost) {
         int count = calculateCount(cost); // 구매 갯수 계산
 
         return count;
