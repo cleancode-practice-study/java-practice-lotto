@@ -23,17 +23,22 @@ public class LottoGameController {
     // 사용자 로또 생성
     private static List<Lotto> createUserLotto() {
         int cost = inputCost(); // 사용자 로또 구입 금액 입력
-        int count = printPurchaseAmountMessage(cost); // 사용자 로또 구입 메세지 출력
+        int count = getCount(cost);
+        printPurchaseAmountMessage(count); // 사용자 로또 구입 갯수 메세지 출력
         List<Lotto> userLotto = getUserLotto(count); // 사용자 구입한 로또 리스트 받기
 
         return userLotto;
     }
 
-    private static int printPurchaseAmountMessage(int cost) {
+    private static int getCount(int cost) {
         int count = getLottoCount(cost);
-        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
 
         return count;
+    }
+
+    // 사용자 로또 구입 갯수 메세지 출력
+    private static void printPurchaseAmountMessage(int count) {
+        OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
     }
 
     private static List<Lotto> getUserLotto(int count) {
