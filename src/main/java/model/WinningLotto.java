@@ -33,7 +33,7 @@ public class WinningLotto {
 
     // 지난 주 당첨 번호 입력
     private static List<Integer> inputWinningNumber() {
-        String[] winningNumber = new String[6];
+        String[] winningNumber;
 
         do {
             String lottoNumber = InputView.inputWinningNumber(); // 지난주 당첨번호 입력

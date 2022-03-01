@@ -12,7 +12,7 @@ public class User {
 
     // 구매 금액 입력
     private static int inputCost() {
-        int cost = LOTTO_TICKET_PRICE;
+        int cost = 0;
 
         do {
             cost = InputView.inputLottoPurchaseCost(); // 구매 금액 입력
