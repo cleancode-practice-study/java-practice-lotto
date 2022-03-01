@@ -2,10 +2,8 @@ package model;
 
 import java.util.List;
 
-import static controller.LottoGameController.getCost;
-import static controller.LottoGameController.getUserLotto;
+import static controller.LottoGameController.*;
 import static model.Lotto.getRandomNumber;
-import static view.OutputView.printPurchaseAmountMessage;
 
 public class User {
     private static final int LOTTO_TICKET_PRICE = 1000;
@@ -15,7 +13,8 @@ public class User {
         int cost = getCost(); // 사용자 로또 구입 금액 입력
         int count = getCount(cost); // 사용자 로또 구입 갯수 구하기
         printPurchaseAmountMessage(count); // 사용자 로또 구입 갯수 메세지 출력
-        List<Lotto> userLotto = getUserLotto(count); // 사용자 구입 로또 리스트 구하기
+        List<Lotto> userLotto = getUserRandomLotto(count); // 사용자 구입 로또 리스트 구하기
+        printUserLotto(userLotto); // 사용자 구입 로또 리스트 출력
 
         return userLotto;
     }

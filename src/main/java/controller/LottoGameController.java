@@ -1,7 +1,6 @@
 package controller;
 
 import model.Lotto;
-import model.Rank;
 import model.Statistics;
 import model.WinningLotto;
 import view.InputView;
@@ -13,14 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 import static model.InputValidator.*;
-import static model.Statistics.initStatistics;
+import static model.Statistics.getWinningStatistics;
+import static model.Statistics.printLottoGameResult;
 import static model.User.createUserLotto;
 import static model.User.getRandomLotto;
 import static model.WinningLotto.createWinningLotto;
 import static model.WinningLotto.splitWinningNumber;
 
 public class LottoGameController {
-    // 구입 금액 구하기
+    // 구입 금액 반환
     public static int getCost() {
         int cost = 0;
 
@@ -33,7 +33,8 @@ public class LottoGameController {
         return cost;
     }
 
-    public static List<Lotto> getUserLotto(int count) {
+    // 사용자 랜덤 로또 반환
+    public static List<Lotto> getUserRandomLotto(int count) {
         List<Lotto> userLotto = new ArrayList<>();
 
         // 랜덤 로또 생성
@@ -42,14 +43,23 @@ public class LottoGameController {
             userLotto.add(lotto);
         }
 
-        OutputView.printUserLotto(userLotto); // 사용자가 구매한 로또 번호 출력
-
         return userLotto;
     }
 
+    public static void printUserLotto(List<Lotto> userLotto) {
+        OutputView.printUserLotto(userLotto); // 사용자가 구매한 로또 번호 출력
+    }
+
     // 사용자 로또 구입 갯수 메세지 출력
-    private static void printPurchaseAmountMessage(int count) {
+    public static void printPurchaseAmountMessage(int count) {
         OutputView.printPurchaseAmountMessage(count); // 구매 갯수 메세지 출력
+    }
+
+    // 당첨 통계 출력
+    public static void printWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
+        Map statistics = getWinningStatistics(userLotto, winningLotto);
+
+        OutputView.printWinningStatisticsResult(statistics);
     }
 
     // 지난 주 당첨 번호 구하기
@@ -79,47 +89,17 @@ public class LottoGameController {
         return bonusNumber;
     }
 
-    public void play() {
-        List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
-        WinningLotto winningLotto = createWinningLotto(); // 당첨 로또 생성
-        printLottoGameResult(userLotto, winningLotto); // 당첨 통계 출력
-    }
-
-    // 당첨 통계 구하기
-    private Map getWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
-        Map<Rank, Integer> statistics = initStatistics();
-
-        Statistics.registerMatchStatistics(userLotto, winningLotto, statistics);
-
-        return statistics;
-    }
-
-    // 당첨 통계 출력
-    private void printWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
-        Map statistics = getWinningStatistics(userLotto, winningLotto);
-
-        OutputView.printWinningStatisticsResult(statistics);
-    }
-
-    private int getWinningMoney(Map<Rank, Integer> statistics) {
-        int winningMoney = Statistics.getTotalWinningMoney(statistics);
-
-        return winningMoney;
-    }
-
     // 총 수익률 출력
-    private void printTotalYield(List<Lotto> userLotto, int winningMoney) {
+    public static void printTotalYield(List<Lotto> userLotto, int winningMoney) {
         int count = userLotto.size();
         double yield = Statistics.getTotalYield(winningMoney, count);
 
         OutputView.printTotalYield(yield);
     }
 
-    // 로또 게임 결과 출력
-    private void printLottoGameResult(List<Lotto> userLotto, WinningLotto winningLotto) {
-        printWinningStatistics(userLotto, winningLotto);
-        Map statistics = getWinningStatistics(userLotto, winningLotto);
-        int winningMoney = getWinningMoney(statistics);
-        printTotalYield(userLotto, winningMoney);
+    public void play() {
+        List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
+        WinningLotto winningLotto = createWinningLotto(); // 당첨 로또 생성
+        printLottoGameResult(userLotto, winningLotto); // 로또 게임 결과 출력
     }
 }

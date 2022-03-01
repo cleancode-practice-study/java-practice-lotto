@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static controller.LottoGameController.printTotalYield;
+import static controller.LottoGameController.printWinningStatistics;
+
 public class Statistics {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
@@ -26,6 +29,20 @@ public class Statistics {
         }
     }
 
+    // 당첨 통계 구하기
+    public static Map getWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
+        Map<Rank, Integer> statistics = initStatistics();
+        Statistics.registerMatchStatistics(userLotto, winningLotto, statistics);
+
+        return statistics;
+    }
+
+    public static int getWinningMoney(Map<Rank, Integer> statistics) {
+        int winningMoney = Statistics.getTotalWinningMoney(statistics);
+
+        return winningMoney;
+    }
+
     // 총 당첨금액
     public static int getTotalWinningMoney(Map<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
@@ -46,5 +63,13 @@ public class Statistics {
         double yield = winningMoney / amountPaid;
 
         return yield;
+    }
+
+    // 로또 게임 결과 출력
+    public static void printLottoGameResult(List<Lotto> userLotto, WinningLotto winningLotto) {
+        printWinningStatistics(userLotto, winningLotto);
+        Map statistics = getWinningStatistics(userLotto, winningLotto);
+        int winningMoney = getWinningMoney(statistics);
+        printTotalYield(userLotto, winningMoney);
     }
 }
