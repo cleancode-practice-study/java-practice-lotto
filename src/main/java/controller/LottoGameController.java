@@ -95,11 +95,14 @@ public class LottoGameController {
     }
 
     // 당첨 통계 출력
-    private int printWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
+    private void printWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
         Map statistics = getWinningStatistics(userLotto, winningLotto);
-        int winningMoney = Statistics.getTotalWinningMoney(statistics);
 
         OutputView.printWinningStatisticsResult(statistics);
+    }
+
+    private int getWinningMoney(Map<Rank, Integer> statistics) {
+        int winningMoney = Statistics.getTotalWinningMoney(statistics);
 
         return winningMoney;
     }
@@ -109,13 +112,14 @@ public class LottoGameController {
         int count = userLotto.size();
         double yield = Statistics.getTotalYield(winningMoney, count);
 
-
         OutputView.printTotalYield(yield);
     }
 
     // 로또 게임 결과 출력
     private void printLottoGameResult(List<Lotto> userLotto, WinningLotto winningLotto) {
-        int winningMoney = printWinningStatistics(userLotto, winningLotto);
+        printWinningStatistics(userLotto, winningLotto);
+        Map statistics = getWinningStatistics(userLotto, winningLotto);
+        int winningMoney = getWinningMoney(statistics);
         printTotalYield(userLotto, winningMoney);
     }
 }
