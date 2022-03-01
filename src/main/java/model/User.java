@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static controller.LottoGameController.*;
@@ -19,6 +20,27 @@ public class User {
         return userLotto;
     }
 
+    // 랜덤 숫자로 생성된 사용자 로또 한장 반환
+    public static Lotto getRandomLotto() {
+        List<Integer> lottoNumber = getRandomNumber();
+        Lotto lotto = new Lotto(lottoNumber);
+
+        return lotto;
+    }
+
+    // 사용자 랜덤 로또 리스트 반환
+    public static List<Lotto> getUserRandomLotto(int count) {
+        List<Lotto> userLotto = new ArrayList<>();
+
+        // 랜덤 로또 생성
+        for (int i = 0; i < count; i++) {
+            Lotto lotto = getRandomLotto();
+            userLotto.add(lotto);
+        }
+
+        return userLotto;
+    }
+
     // 사용자 로또 구입 갯수 구하기
     public static int getCount(int cost) {
         int count = calculateCount(cost); // 사용자 구입 금액 > 구입 갯수 계산
@@ -26,18 +48,11 @@ public class User {
         return count;
     }
 
-    // 사용자 구매 갯수 계산 메소드
+    // 사용자 로또 구입 갯수 계산 메소드
     public static int calculateCount(int cost) {
         int count = cost / LOTTO_TICKET_PRICE;
 
         return count;
     }
 
-    // 랜덤 숫자로 생성된 사용자 로또 반환
-    public static Lotto getRandomLotto() {
-        List<Integer> lottoNumber = getRandomNumber();
-        Lotto lotto = new Lotto(lottoNumber);
-
-        return lotto;
-    }
 }

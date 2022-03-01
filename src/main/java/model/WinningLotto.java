@@ -14,6 +14,13 @@ public class WinningLotto {
         this.bonusNo = bonusNo;
     }
 
+    public Rank match(Lotto userLotto) {
+        int matchCount = userLotto.getMatchCount(lotto);
+        boolean matchBonus = userLotto.isContainsBonusNumber(bonusNo);
+
+        return Rank.valueOf(matchCount, matchBonus);
+    }
+
     // 당첨 로또 생성
     public static WinningLotto createWinningLotto() {
         List<Integer> winningNumber = getWinningNumber();
@@ -29,12 +36,5 @@ public class WinningLotto {
     // 지난 주 당첨번호 String > String[] 스플릿
     public static String[] splitWinningNumber(String number) {
         return number.split(",");
-    }
-
-    public Rank match(Lotto userLotto) {
-        int matchCount = userLotto.getMatchCount(lotto);
-        boolean matchBonus = userLotto.isContainsBonusNumber(bonusNo);
-
-        return Rank.valueOf(matchCount, matchBonus);
     }
 }

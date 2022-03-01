@@ -21,14 +21,6 @@ public class Statistics {
         return statistics;
     }
 
-    // 매치 통계 등록
-    public static void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
-        for (Lotto lotto : userLotto) {
-            Rank rank = winningLotto.match(lotto);
-            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
-        }
-    }
-
     // 당첨 통계 구하기
     public static Map getWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
         Map<Rank, Integer> statistics = initStatistics();
@@ -37,13 +29,15 @@ public class Statistics {
         return statistics;
     }
 
-    public static int getWinningMoney(Map<Rank, Integer> statistics) {
-        int winningMoney = Statistics.getTotalWinningMoney(statistics);
-
-        return winningMoney;
+    // 매치 통계 결과 등록
+    public static void registerMatchStatistics(List<Lotto> userLotto, WinningLotto winningLotto, Map<Rank, Integer> statistics) {
+        for (Lotto lotto : userLotto) {
+            Rank rank = winningLotto.match(lotto);
+            statistics.put(rank, statistics.getOrDefault(rank, 0) + 1);
+        }
     }
 
-    // 총 당첨금액
+    // 총 당첨 금액 반환
     public static int getTotalWinningMoney(Map<Rank, Integer> statistics) {
         int totalWinningMoney = 0;
 
@@ -57,7 +51,7 @@ public class Statistics {
         return totalWinningMoney;
     }
 
-    // 총 수익률
+    // 총 수익률 반환
     public static double getTotalYield(double winningMoney, int amount) {
         double amountPaid = (amount * LOTTO_TICKET_PRICE);
         double yield = winningMoney / amountPaid;
@@ -69,7 +63,7 @@ public class Statistics {
     public static void printLottoGameResult(List<Lotto> userLotto, WinningLotto winningLotto) {
         printWinningStatistics(userLotto, winningLotto);
         Map statistics = getWinningStatistics(userLotto, winningLotto);
-        int winningMoney = getWinningMoney(statistics);
+        int winningMoney = getTotalWinningMoney(statistics);
         printTotalYield(userLotto, winningMoney);
     }
 }

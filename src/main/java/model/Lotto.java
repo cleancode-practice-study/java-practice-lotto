@@ -13,6 +13,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    // 로또 랜덤 숫자 반환
     public static List<Integer> getRandomNumber() {
         List<Integer> randomNumbers = new ArrayList<>();
 
