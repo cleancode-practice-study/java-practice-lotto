@@ -5,11 +5,15 @@ import java.util.*;
 public class GameHelper {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
 
-    public static void createLottoes(List<Lotto> lottoes, int lottoCount) {
+    public static List<Lotto> createLottoes(int lottoCount) {
+        List<Lotto> lottoes = new ArrayList<>();
+
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = createOneLotto();
             lottoes.add(lotto);
         }
+
+        return lottoes;
     }
 
     // 로또 금액 받아서 몇개 산 건지 계산

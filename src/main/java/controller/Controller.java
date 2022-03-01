@@ -25,9 +25,7 @@ public class Controller {
         // 몇 개의 로또를 구매했는 지 출력
         OutputView.printLottoCount(lottoCount);
 
-        List<Lotto> lottoes = new ArrayList<>();
-
-        GameHelper.createLottoes(lottoes, lottoCount);
+        List<Lotto> lottoes = GameHelper.createLottoes(lottoCount);
 
         // 구매한 로또 번호 출력
         OutputView.printLottoNumber(lottoes);
