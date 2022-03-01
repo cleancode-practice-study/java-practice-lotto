@@ -1,7 +1,6 @@
 package controller;
 
 import model.Lotto;
-import model.Statistics;
 import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
@@ -12,13 +11,20 @@ import java.util.List;
 import java.util.Map;
 
 import static model.InputValidator.*;
-import static model.Statistics.getWinningStatistics;
-import static model.Statistics.printLottoGameResult;
+import static model.Statistics.*;
 import static model.User.createUserLotto;
 import static model.WinningLotto.createWinningLotto;
 import static model.WinningLotto.splitWinningNumber;
 
 public class LottoGameController {
+    // 총 수익률 출력
+    public static void printTotalYield(List<Lotto> userLotto, int winningMoney) {
+        int count = userLotto.size();
+        double yield = getTotalYield(winningMoney, count);
+
+        OutputView.printTotalYield(yield);
+    }
+
     // 사용자 구입 로또 리스트 출력
     public static void printUserLotto(List<Lotto> userLotto) {
         OutputView.printUserLotto(userLotto);
@@ -80,13 +86,5 @@ public class LottoGameController {
         List<Lotto> userLotto = createUserLotto(); // 사용자 로또 생성
         WinningLotto winningLotto = createWinningLotto(); // 당첨 로또 생성
         printLottoGameResult(userLotto, winningLotto); // 로또 게임 결과 출력
-    }
-
-    // 총 수익률 출력
-    public static void printTotalYield(List<Lotto> userLotto, int winningMoney) {
-        int count = userLotto.size();
-        double yield = Statistics.getTotalYield(winningMoney, count);
-
-        OutputView.printTotalYield(yield);
     }
 }

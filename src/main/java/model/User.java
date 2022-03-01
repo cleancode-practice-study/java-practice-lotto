@@ -21,7 +21,7 @@ public class User {
     }
 
     // 랜덤 숫자로 생성된 사용자 로또 한장 반환
-    public static Lotto getRandomLotto() {
+    private static Lotto getRandomLotto() {
         List<Integer> lottoNumber = getRandomNumber();
         Lotto lotto = new Lotto(lottoNumber);
 
@@ -49,7 +49,7 @@ public class User {
     }
 
     // 사용자 로또 구입 갯수 계산 메소드
-    public static int calculateCount(int cost) {
+    private static int calculateCount(int cost) {
         int count = cost / LOTTO_TICKET_PRICE;
 
         return count;
