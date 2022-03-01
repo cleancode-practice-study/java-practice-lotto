@@ -2,8 +2,8 @@ package model;
 
 import java.util.List;
 
-import static controller.LottoGameController.inputWinningNumber;
-import static view.InputView.inputBonusNumber;
+import static controller.LottoGameController.getBonusNumber;
+import static controller.LottoGameController.getWinningNumber;
 
 public class WinningLotto {
     private final Lotto lotto;
@@ -16,8 +16,8 @@ public class WinningLotto {
 
     // 당첨 로또 생성
     public static WinningLotto createWinningLotto() {
-        List<Integer> winningNumber = inputWinningNumber();
-        int bonusNumber = inputBonusNumber();
+        List<Integer> winningNumber = getWinningNumber();
+        int bonusNumber = getBonusNumber();
 
         Lotto lotto = new Lotto(winningNumber); // 로또 티켓 생성
 
