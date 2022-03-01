@@ -2,24 +2,9 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class UserTest {
-    @Test
-    void 랜덤_로또_생성() {
-        //given
-        User user = new User();
-        int count = 5;
-
-        //when
-        List<Lotto> lotto = user.getRandomLottoNumber(count);
-
-        //then
-        assertThat(lotto.size()).isEqualTo(5);
-    }
-
     @Test
     void 사용자가_구매한_로또_갯수_계산() {
         //given

@@ -2,7 +2,7 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
-import static model.WinningLotto.splitLastWeekNumber;
+import static model.WinningLotto.splitWinningNumber;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class WinningLottoTest {
@@ -12,7 +12,7 @@ public class WinningLottoTest {
         String number = "1,2,3";
 
         //when
-        String[] numbers = splitLastWeekNumber(number);
+        String[] numbers = splitWinningNumber(number);
 
         //then
         assertThat(numbers[0]).isEqualTo("1");
