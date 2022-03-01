@@ -4,6 +4,7 @@ import java.util.*;
 
 public class GameHelper {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
+    private static final int LOTTO_NUM_PER_ONE_LINE = 6;
 
     public static List<Lotto> createLottoes(int lottoCount) {
         List<Lotto> lottoes = new ArrayList<>();
@@ -38,7 +39,7 @@ public class GameHelper {
 
     public static boolean checkDuplicatedNumber(String winningNumbers) {
         Set<Integer> splitWinningNumbers = splitWinnigLottoNumber(winningNumbers);
-        return splitWinningNumbers.size() == 6;
+        return splitWinningNumbers.size() == LOTTO_NUM_PER_ONE_LINE;
     }
 
     // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
@@ -51,18 +52,6 @@ public class GameHelper {
         }
 
         return winningLottoNumber;
-    }
-
-    public static int getLottoTotalMoney(WinningLotto winningLotto, List<Lotto> lottoes) {
-        int totalWinMoney = 0;
-
-        for(Lotto lotto : lottoes) {
-            // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
-            Rank rank = winningLotto.match(lotto);
-            totalWinMoney += rank.getWinningMoney();
-        }
-
-        return totalWinMoney;
     }
 
     public static List<Integer> getLottoResult(WinningLotto winningLotto, List<Lotto> lottoes) {
@@ -111,8 +100,24 @@ public class GameHelper {
         return lottoWinResult;
     }
 
-    public static double getYield(int totalGetMoney, int lottoPrice) {
+    public static double getYield(Map<Rank, Integer> lottoWinResult, int lottoPrice) {
+        int totalGetMoney = getLottoTotalMoney(lottoWinResult);
+
         return (double)totalGetMoney / lottoPrice;
+    }
+
+    // 구한 당첨결과 맵을 이용해서 총 상금 구하는 메서드
+    public static int getLottoTotalMoney(Map<Rank, Integer> lottoWinResult) {
+        int totalWinMoney = 0;
+
+        for(Rank rank : lottoWinResult.keySet()) {
+            // 따낸 로또 랭크가 있다면 totalWinMoney에 더하기
+            if(lottoWinResult.get(rank) > 0) {
+                totalWinMoney += rank.getWinningMoney();
+            }
+        }
+
+        return totalWinMoney;
     }
 
 }
