@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class StatisticsTest {
     @Test
-    void 총_수익률_test() {
+    void 총_수익률을_구하는_경우() {
         //given
         Statistics statistics = new Statistics();
         double winningMoney = 5000;
