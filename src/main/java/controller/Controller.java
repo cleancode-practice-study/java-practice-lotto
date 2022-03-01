@@ -18,17 +18,16 @@ public class Controller {
 
     // 랜덤 로또 받아서 출력
     private List<Lotto> getLottoes() {
-        domain.GameHelper helper = new domain.GameHelper();
         // 얼마 어치의 로또를 구매할 건지 입력
         int lottoPrice = InputView.inputLottoPurchasePrice();
-        int lottoCount = helper.getLottoCount(lottoPrice);
+        int lottoCount = GameHelper.getLottoCount(lottoPrice);
 
         // 몇 개의 로또를 구매했는 지 출력
         OutputView.printLottoCount(lottoCount);
 
         List<Lotto> lottoes = new ArrayList<>();
 
-        helper.createLottoes(lottoes, lottoCount);
+        GameHelper.createLottoes(lottoes, lottoCount);
 
         // 구매한 로또 번호 출력
         OutputView.printLottoNumber(lottoes);
@@ -42,8 +41,6 @@ public class Controller {
 
     // 당첨 로또 받기
     private WinningLotto getWinningLotto() {
-        domain.GameHelper helper = new domain.GameHelper();
-
         String winningNumbers = null;
         boolean isValid = false;
 
@@ -52,7 +49,7 @@ public class Controller {
             // 당첨 로또 번호 받기
             winningNumbers = InputView.inputWinningLottoNumber();
             // 중복인지 확인
-            isValid = helper.checkDuplicatedNumber(winningNumbers);
+            isValid = GameHelper.checkDuplicatedNumber(winningNumbers);
 
             // 중복이면 오류 메시지 출력 후 다시 받도록 함.
             if (!isValid) {
@@ -63,24 +60,21 @@ public class Controller {
         // 당첨 로또 보너스 받기
         int bonusNum = InputView.inputWinningBonusNumber();
 
-        return helper.createWinningLotto(winningNumbers, bonusNum);
+        return GameHelper.createWinningLotto(winningNumbers, bonusNum);
     }
 
     // 모델에게 값 받아 로또 당첨 결과 출력
     private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
-        domain.GameHelper helper = new domain.GameHelper();
-
         // 당첨 결과 리스트로 받기 순서대로 [3개 일치, 4개일치, 5개 일치, 5개 + 보너스 일치, 6개 일치 개수]
-        List<Integer> winningResult = helper.getLottoResult(winningLotto, lottoes);
+        List<Integer> winningResult = GameHelper.getLottoResult(winningLotto, lottoes);
 
         // 당첨 금액과 구매 금액으로 수익률 구하기
-        int totalGetMoney = helper.getLottoTotalMoney(winningLotto, lottoes);
-        double yield = helper.getYield(totalGetMoney, lottoes.size() * LOTTO_PRICE_PER_ONE);
+        int totalGetMoney = GameHelper.getLottoTotalMoney(winningLotto, lottoes);
+        double yield = GameHelper.getYield(totalGetMoney, lottoes.size() * LOTTO_PRICE_PER_ONE);
 
         // 당첨 통계 출력
         OutputView.printLottoResult(winningResult);
         OutputView.pringLottoYield(yield);
     }
-
 
 }

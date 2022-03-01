@@ -5,7 +5,7 @@ import java.util.*;
 public class GameHelper {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
 
-    public void createLottoes(List<Lotto> lottoes, int lottoCount) {
+    public static void createLottoes(List<Lotto> lottoes, int lottoCount) {
         for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = createOneLotto();
             lottoes.add(lotto);
@@ -13,17 +13,17 @@ public class GameHelper {
     }
 
     // 로또 금액 받아서 몇개 산 건지 계산
-    public int getLottoCount(int lottoPrice) {
+    public static int getLottoCount(int lottoPrice) {
         return lottoPrice / LOTTO_PRICE_PER_ONE;
     }
 
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
-    public Lotto createOneLotto() {
+    private static Lotto createOneLotto() {
         List<Integer> lottoNums = CreateLottoNumber.createLottosNumber();
         return new Lotto(lottoNums);
     }
 
-    public WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
+    public static WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
         Set<Integer> splitNumbers = splitWinnigLottoNumber(winningNumbers);
         List<Integer> winningLottoNumber = new ArrayList<>(splitNumbers);
 
@@ -32,13 +32,13 @@ public class GameHelper {
         return new WinningLotto(lotto, bonusNumber);
     }
 
-    public boolean checkDuplicatedNumber(String winningNumbers) {
+    public static boolean checkDuplicatedNumber(String winningNumbers) {
         Set<Integer> splitWinningNumbers = splitWinnigLottoNumber(winningNumbers);
         return splitWinningNumbers.size() == 6;
     }
 
     // 입력한 지난번 당첨 로또 번호 split -> List에 담아서 리턴
-    private Set<Integer> splitWinnigLottoNumber(String winningNumbers) {
+    private static Set<Integer> splitWinnigLottoNumber(String winningNumbers) {
         String[] splitNumbers = winningNumbers.split(",");
         Set<Integer> winningLottoNumber = new HashSet<>();
 
@@ -49,7 +49,7 @@ public class GameHelper {
         return winningLottoNumber;
     }
 
-    public int getLottoTotalMoney(WinningLotto winningLotto, List<Lotto> lottoes) {
+    public static int getLottoTotalMoney(WinningLotto winningLotto, List<Lotto> lottoes) {
         int totalWinMoney = 0;
 
         for(Lotto lotto : lottoes) {
@@ -61,13 +61,13 @@ public class GameHelper {
         return totalWinMoney;
     }
 
-    public List<Integer> getLottoResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+    public static List<Integer> getLottoResult(WinningLotto winningLotto, List<Lotto> lottoes) {
         Map<Rank, Integer> lottoResult = checkLottoWinCount(winningLotto, lottoes);
 
         return getLottoWinResult(lottoResult);
     }
 
-    private Map<Rank, Integer> checkLottoWinCount(WinningLotto winningLotto, List<Lotto> lottoes) {
+    private static Map<Rank, Integer> checkLottoWinCount(WinningLotto winningLotto, List<Lotto> lottoes) {
         // 맞은 로또 결과 저장할 Map 초기화
         Map<Rank, Integer> lottoResult = createResult();
 
@@ -82,7 +82,7 @@ public class GameHelper {
     }
 
     // 맞은 로또 결과 저장할 Map 초기화
-    private Map<Rank, Integer> createResult(){
+    private static Map<Rank, Integer> createResult(){
         Map<Rank, Integer> lottoResult = new HashMap<>();
 
         lottoResult.put(Rank.MISS, 0);
@@ -95,7 +95,7 @@ public class GameHelper {
         return lottoResult;
     }
 
-    public List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
+    public static List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
         List<Integer> lottoWinResult = new ArrayList<>();
 
         lottoWinResult.add(lottoResult.get(Rank.FIFTH));
@@ -107,7 +107,7 @@ public class GameHelper {
         return lottoWinResult;
     }
 
-    public double getYield(int totalGetMoney, int lottoPrice) {
+    public static double getYield(int totalGetMoney, int lottoPrice) {
         return (double)totalGetMoney / lottoPrice;
     }
 
