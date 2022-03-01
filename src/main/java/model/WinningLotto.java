@@ -47,7 +47,7 @@ public class WinningLotto {
     }
 
     // 지난 주 당첨번호 String > String[] 스플릿
-    public static String[] splitWinningNumber(String number) {
+    private static String[] splitWinningNumber(String number) {
         return number.split(",");
     }
 

@@ -11,7 +11,7 @@ public class User {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     // 구매 금액 입력
-    public static int inputCost() {
+    private static int inputCost() {
         int cost = LOTTO_TICKET_PRICE;
 
         do {
@@ -32,7 +32,7 @@ public class User {
     }
 
     // 사용자 구매 갯수 계산 메소드
-    public static int calculateCount(int cost) {
+    private static int calculateCount(int cost) {
         int count = cost / LOTTO_TICKET_PRICE;
 
         return count;
