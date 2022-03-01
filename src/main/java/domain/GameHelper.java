@@ -23,7 +23,7 @@ public class GameHelper {
 
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
     private static Lotto createOneLotto() {
-        List<Integer> lottoNums = CreateLottoNumber.createLottosNumber();
+        List<Integer> lottoNums = LottoNumberCreator.createLottosNumber();
         return new Lotto(lottoNums);
     }
 

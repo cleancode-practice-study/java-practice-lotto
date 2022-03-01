@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 
-public class CreateLottoNumber {
+public class LottoNumberCreator {
     static private final int LOTTO_NUM_PER_ONE_LINE = 6;
     static private final int LOTTO_NUM_START_INCLUSIVE = 1;
     static private final int LOTTO_NUM_END_INCLUSIVE = 45;
@@ -20,6 +20,6 @@ public class CreateLottoNumber {
     }
 
     private static int getRandomNumber() {
-        return random.nextInt(LOTTO_NUM_END_INCLUSIVE) + CreateLottoNumber.LOTTO_NUM_START_INCLUSIVE;
+        return random.nextInt(LOTTO_NUM_END_INCLUSIVE) + LottoNumberCreator.LOTTO_NUM_START_INCLUSIVE;
     }
 }
