@@ -6,6 +6,12 @@ public class GameHelper {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
     private static final int LOTTO_NUM_PER_ONE_LINE = 6;
 
+    // 로또 금액 받아서 몇개 산 건지 계산
+    public static int getLottoCount(int lottoPrice) {
+        return lottoPrice / LOTTO_PRICE_PER_ONE;
+    }
+
+    // 로또 생성
     public static List<Lotto> createLottoes(int lottoCount) {
         List<Lotto> lottoes = new ArrayList<>();
 
@@ -17,17 +23,13 @@ public class GameHelper {
         return lottoes;
     }
 
-    // 로또 금액 받아서 몇개 산 건지 계산
-    public static int getLottoCount(int lottoPrice) {
-        return lottoPrice / LOTTO_PRICE_PER_ONE;
-    }
-
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
     private static Lotto createOneLotto() {
         List<Integer> lottoNums = LottoNumberCreator.createLottosNumber();
         return new Lotto(lottoNums);
     }
 
+    // 당첨 로또 생성
     public static WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
         Set<Integer> splitNumbers = splitWinnigLottoNumber(winningNumbers);
         List<Integer> winningLottoNumber = new ArrayList<>(splitNumbers);
