@@ -91,7 +91,7 @@ public class GameHelper {
     }
 
     // 구한 당첨결과 맵을 이용해서 총 상금 구하는 메서드
-    public static int getLottoTotalMoney(Map<Rank, Integer> lottoWinResult) {
+    private static int getLottoTotalMoney(Map<Rank, Integer> lottoWinResult) {
         int totalWinMoney = 0;
 
         for(Rank rank : lottoWinResult.keySet()) {
