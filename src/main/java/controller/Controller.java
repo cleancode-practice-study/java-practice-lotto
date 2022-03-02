@@ -35,8 +35,6 @@ public class Controller {
         return lottoes;
     }
 
-
-
     // 당첨 로또 받기
     private WinningLotto getWinningLotto() {
         String winningNumbers = null;
@@ -63,16 +61,15 @@ public class Controller {
 
     // 모델에게 값 받아 로또 당첨 결과 출력
     private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
-        // 당첨 결과 리스트로 받기 순서대로 [3개 일치, 4개일치, 5개 일치, 5개 + 보너스 일치, 6개 일치 개수]
-        List<Integer> winningResult = GameHelper.getLottoResult(winningLotto, lottoes);
+        // 당첨 결과 구하기
+        Map<Rank, Integer> lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
 
-        // 당첨 금액과 구매 금액으로 수익률 구하기
-        int totalGetMoney = GameHelper.getLottoTotalMoney(winningLotto, lottoes);
-        double yield = GameHelper.getYield(totalGetMoney, lottoes.size() * LOTTO_PRICE_PER_ONE);
+        // 수익률 구하기
+        double yield = GameHelper.getYield(lottoWinResult, lottoes.size() * LOTTO_PRICE_PER_ONE);
 
         // 당첨 통계 출력
-        OutputView.printLottoResult(winningResult);
-        OutputView.pringLottoYield(yield);
+        OutputView.printLottoResult(lottoWinResult);
+        OutputView.printLottoYield(yield);
     }
 
 }

@@ -54,13 +54,7 @@ public class GameHelper {
         return winningLottoNumber;
     }
 
-    public static List<Integer> getLottoResult(WinningLotto winningLotto, List<Lotto> lottoes) {
-        Map<Rank, Integer> lottoResult = checkLottoWinCount(winningLotto, lottoes);
-
-        return getLottoWinResult(lottoResult);
-    }
-
-    private static Map<Rank, Integer> checkLottoWinCount(WinningLotto winningLotto, List<Lotto> lottoes) {
+    public static Map<Rank, Integer> getLottoWinResult(WinningLotto winningLotto, List<Lotto> lottoes) {
         // 맞은 로또 결과 저장할 Map 초기화
         Map<Rank, Integer> lottoResult = createResult();
 
@@ -86,18 +80,6 @@ public class GameHelper {
         lottoResult.put(Rank.FIRST, 0);
 
         return lottoResult;
-    }
-
-    public static List<Integer> getLottoWinResult(Map<Rank, Integer> lottoResult) {
-        List<Integer> lottoWinResult = new ArrayList<>();
-
-        lottoWinResult.add(lottoResult.get(Rank.FIFTH));
-        lottoWinResult.add(lottoResult.get(Rank.FOURTH));
-        lottoWinResult.add(lottoResult.get(Rank.THIRD));
-        lottoWinResult.add(lottoResult.get(Rank.SECOND));
-        lottoWinResult.add(lottoResult.get(Rank.FIRST));
-
-        return lottoWinResult;
     }
 
     public static double getYield(Map<Rank, Integer> lottoWinResult, int lottoPrice) {

@@ -1,8 +1,10 @@
 package view;
 
 import domain.Lotto;
+import domain.Rank;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE = "%s개를 구매했습니다.";
@@ -31,17 +33,17 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResult(List<Integer> winningResult) {
+    public static void printLottoResult(Map<Rank, Integer> lottoWinResult) {
         System.out.println();
         System.out.println(LOTTO_RESULT_OUTPUT_MESSAGE);
-        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, winningResult.get(0));
-        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, winningResult.get(1));
-        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, winningResult.get(2));
-        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, winningResult.get(3));
-        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, winningResult.get(4));
+        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FIFTH));
+        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FOURTH));
+        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.get(Rank.THIRD));
+        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.get(Rank.SECOND));
+        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FIRST));
     }
 
-    public static void pringLottoYield(double yield) {
+    public static void printLottoYield(double yield) {
         System.out.printf(LOTTO_YIELD_OUTPUT_MESSAGE, yield);
     }
 
