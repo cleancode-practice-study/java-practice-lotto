@@ -12,7 +12,7 @@ public class GameHelper {
     }
 
     // 로또 생성
-    public static List<Lotto> createLottoes(int lottoCount) {
+    public static Lottoes createLottoes(int lottoCount) {
         List<Lotto> lottoes = new ArrayList<>();
 
         for (int i = 0; i < lottoCount; i++) {
@@ -20,7 +20,7 @@ public class GameHelper {
             lottoes.add(lotto);
         }
 
-        return lottoes;
+        return new Lottoes(lottoes);
     }
 
     // 랜덤 숫자로 이루어진 하나의 로또 객체 생성하기.
@@ -56,11 +56,11 @@ public class GameHelper {
         return winningLottoNumber;
     }
 
-    public static Map<Rank, Integer> getLottoWinResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+    public static Map<Rank, Integer> getLottoWinResult(WinningLotto winningLotto, Lottoes lottoes) {
         // 맞은 로또 결과 저장할 Map 초기화
         Map<Rank, Integer> lottoResult = createResult();
 
-        for(Lotto lotto : lottoes) {
+        for(Lotto lotto : lottoes.getLottoes()) {
             // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
             Rank rank = winningLotto.match(lotto);
 

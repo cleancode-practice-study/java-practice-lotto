@@ -20,8 +20,9 @@ public class GameHelperTest {
 
     @Test
     public void 로또_생성() {
-        List<Lotto> lottoes = GameHelper.createLottoes(3);
-        for(Lotto lotto : lottoes) {
+        Lottoes lottoes = GameHelper.createLottoes(3);
+
+        for(Lotto lotto : lottoes.getLottoes()) {
             for(int lottoNumber : lotto.getLottoNum()) {
                 assertThat(lottoNumber).isBetween(LOTTO_NUM_START, LOTTO_NUM_END);
             }
@@ -61,7 +62,9 @@ public class GameHelperTest {
         Lotto lottoOne = new Lotto(lottoOneNumber);
         Lotto lottoTwo = new Lotto(lottoTwoNumber);
 
-        List<Lotto> lottoes = Arrays.asList(lottoOne, lottoTwo);
+        List<Lotto> lottoTwoLine = Arrays.asList(lottoOne, lottoTwo);
+
+        Lottoes lottoes = new Lottoes(lottoTwoLine);
 
         Lotto lottoForWinningLotto = new Lotto(lottoOneNumber);
 

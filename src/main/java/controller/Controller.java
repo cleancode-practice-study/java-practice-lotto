@@ -11,13 +11,13 @@ public class Controller {
     private static final int LOTTO_PRICE_PER_ONE = 1000;
 
     public void run() {
-        List<Lotto> lottoes = getLottoes();
+        Lottoes lottoes = getLottoes();
         WinningLotto winningLotto = getWinningLotto();
         printResult(winningLotto, lottoes);
     }
 
     // 랜덤 로또 받아서 출력
-    private List<Lotto> getLottoes() {
+    private Lottoes getLottoes() {
         // 얼마 어치의 로또를 구매할 건지 입력
         int lottoPrice = InputView.inputLottoPurchasePrice();
         int lottoCount = GameHelper.getLottoCount(lottoPrice);
@@ -25,7 +25,7 @@ public class Controller {
         // 몇 개의 로또를 구매했는 지 출력
         OutputView.printLottoCount(lottoCount);
 
-        List<Lotto> lottoes = GameHelper.createLottoes(lottoCount);
+        Lottoes lottoes = GameHelper.createLottoes(lottoCount);
 
         // 구매한 로또 번호 출력
         OutputView.printLottoNumber(lottoes);
@@ -60,12 +60,12 @@ public class Controller {
     }
 
     // 모델에게 값 받아 로또 당첨 결과 출력
-    private void printResult(WinningLotto winningLotto, List<Lotto> lottoes) {
+    private void printResult(WinningLotto winningLotto, Lottoes lottoes) {
         // 당첨 결과 구하기
         Map<Rank, Integer> lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
 
         // 수익률 구하기
-        double yield = GameHelper.getYield(lottoWinResult, lottoes.size() * LOTTO_PRICE_PER_ONE);
+        double yield = GameHelper.getYield(lottoWinResult, lottoes.getLottoes().size() * LOTTO_PRICE_PER_ONE);
 
         // 당첨 통계 출력
         OutputView.printLottoResult(lottoWinResult);

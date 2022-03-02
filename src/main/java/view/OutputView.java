@@ -1,9 +1,9 @@
 package view;
 
 import domain.Lotto;
+import domain.Lottoes;
 import domain.Rank;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -27,8 +27,8 @@ public class OutputView {
         System.out.println(WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
     }
 
-    public static void printLottoNumber(List<Lotto> lottoes) {
-        for (Lotto lotto : lottoes) {
+    public static void printLottoNumber(Lottoes lottoes) {
+        for (Lotto lotto : lottoes.getLottoes()) {
             System.out.println(lotto.getLottoNum());
         }
     }
