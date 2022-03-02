@@ -24,7 +24,7 @@ public class WinningLotto {
         return Rank.valueOf(matchCount, matchBonus);
     }
 
-    public static List<Integer> changeStringArrayToList(String[] winningNumber) {
+    private static List<Integer> changeStringArrayToList(String[] winningNumber) {
         int[] numbers = Arrays.stream(winningNumber).mapToInt(Integer::parseInt).toArray(); // string[] > int[]
 
         return IntStream.of(numbers).boxed().collect(Collectors.toList());
