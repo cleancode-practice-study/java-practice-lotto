@@ -23,16 +23,12 @@ public class InputValidator {
 
     // 구입 금액_단위_1000원 단위인지
     public static boolean isValidateCostUnit(int cost) {
-        boolean check = ((cost % MIN_LOTTO_COST) == LOTTO_COST_REMAINDER);
-
-        return check;
+        return ((cost % MIN_LOTTO_COST) == LOTTO_COST_REMAINDER);
     }
 
     // 구입 금액_최소금액_1000원인지
     public static boolean isValidateCostMinCost(int cost) {
-        boolean check = cost >= MIN_LOTTO_COST;
-
-        return check;
+        return cost >= MIN_LOTTO_COST;
     }
 
     // 보너스 넘버_범위_1~45_체크

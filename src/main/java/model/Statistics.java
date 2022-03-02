@@ -11,7 +11,7 @@ public class Statistics {
     private static final int LOTTO_TICKET_PRICE = 1000;
 
     // 당첨 통계 구하기
-    public static Map getWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
+    public static Map<Rank, Integer> getWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
         Map<Rank, Integer> statistics = initStatistics();
         registerMatchStatistics(userLotto, winningLotto, statistics);
 
@@ -21,15 +21,14 @@ public class Statistics {
     // 총 수익률 반환
     public static double getTotalYield(double winningMoney, int amount) {
         double amountPaid = (amount * LOTTO_TICKET_PRICE);
-        double yield = winningMoney / amountPaid;
 
-        return yield;
+        return winningMoney / amountPaid;
     }
 
     // 로또 게임 결과 출력
     public static void printLottoGameResult(List<Lotto> userLotto, WinningLotto winningLotto) {
         printWinningStatistics(userLotto, winningLotto);
-        Map statistics = getWinningStatistics(userLotto, winningLotto);
+        Map<Rank, Integer> statistics = getWinningStatistics(userLotto, winningLotto);
         int winningMoney = getTotalWinningMoney(statistics);
         printTotalYield(userLotto, winningMoney);
     }

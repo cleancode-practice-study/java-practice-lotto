@@ -32,20 +32,16 @@ public class Lotto {
     // 당첨 번호와 사용자 로또 번호 중 일치하는 번호가 몇개인지 반환
     public int getMatchCount(Lotto winningLotto) {
         List<Integer> user = numbers;
-        List<Integer> winningNumber = winningLotto.getNumber();
+        List<Integer> winning = winningLotto.getNumber();
+        List<Integer> win = new ArrayList<>();
 
-        List<Integer> winning = new ArrayList<>();
-
-        // 오류 해결 부분
-        for (int i = 0; i < winningNumber.size(); i++) {
-            winning.add(Integer.valueOf(String.valueOf(winningNumber.get(i))));
+        for (Integer i : winning) {
+            win.add(Integer.valueOf(String.valueOf(i)));
         }
 
-        user.retainAll(winning);
+        user.retainAll(win);
 
-        int matchCount = user.size();
-
-        return matchCount;
+        return user.size();
     }
 
     // 보너스 번호를 포함하고 있는지 true/false 반환

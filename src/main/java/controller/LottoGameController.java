@@ -1,12 +1,11 @@
 package controller;
 
 import model.Lotto;
+import model.Rank;
 import model.WinningLotto;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +43,7 @@ public class LottoGameController {
     }
 
     // 지난 주 당첨 번호 반환
-    public static List<Integer> getWinningNumber() {
+    public static String[] getWinningNumber() {
         String[] winningNumber;
 
         do {
@@ -53,9 +52,7 @@ public class LottoGameController {
         }
         while (!(isValidateWinningNumberLength(winningNumber)));
 
-        List<Integer> winningNumbers = new ArrayList(Arrays.asList(winningNumber));
-
-        return winningNumbers;
+        return winningNumber;
     }
 
     // 사용자 로또 구입 갯수 메세지 출력
@@ -65,7 +62,7 @@ public class LottoGameController {
 
     // 당첨 통계 출력
     public static void printWinningStatistics(List<Lotto> userLotto, WinningLotto winningLotto) {
-        Map statistics = getWinningStatistics(userLotto, winningLotto);
+        Map<Rank, Integer> statistics = getWinningStatistics(userLotto, winningLotto);
 
         OutputView.printWinningStatisticsResult(statistics);
     }
