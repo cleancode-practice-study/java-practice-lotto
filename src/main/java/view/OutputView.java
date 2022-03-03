@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class OutputView {
     private static final String PURCHASE_INFORMATION_MESSAGE = "개를 구매했습니다.";
-    private static final String WINNING_STATISTICS_INFORMATION_MESSAGE = "당첨 통계\n--------------";
+    private static final String WINNING_STATISTICS_INFORMATION_MESSAGE = "당첨 통계\n------------------";
     private static final String FIFTH_RANK_GUIDE_MESSAGE = "3개 일치 (5,000원) - ";
     private static final String FOURTH_RANK_GUIDE_MESSAGE = "4개 일치 (50,000원) - ";
     private static final String THREE_RANK_GUIDE_MESSAGE = "5개 일치 (1,500,000원) - ";
@@ -19,7 +19,7 @@ public class OutputView {
     private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 ";
     private static final String PREPOSITIONAL_PARTICLE_FOR_VERB_MESSAGE = " 입니다.";
 
-    public static void printPurchaseAmountMessage(int amount) {
+    public static void printPurchaseMessage(int amount) {
         System.out.println(amount + PURCHASE_INFORMATION_MESSAGE);
     }
 
@@ -31,7 +31,7 @@ public class OutputView {
         System.out.println("");
     }
 
-    public static void printWinningStatisticsResult(Map<Rank, Integer> winningStatistics) {
+    public static void printWinningStatistics(Map<Rank, Integer> winningStatistics) {
         System.out.println(WINNING_STATISTICS_INFORMATION_MESSAGE);
         System.out.println(FIFTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FIFTH) + LOTTO_UNIT);
         System.out.println(FOURTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FOURTH) + LOTTO_UNIT);
