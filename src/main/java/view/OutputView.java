@@ -3,6 +3,7 @@ package view;
 import domain.Lotto;
 import domain.Lottoes;
 import domain.Rank;
+import domain.WinningResult;
 
 import java.util.Map;
 
@@ -33,14 +34,14 @@ public class OutputView {
         }
     }
 
-    public static void printLottoResult(Map<Rank, Integer> lottoWinResult) {
+    public static void printLottoResult(WinningResult lottoWinResult) {
         System.out.println();
         System.out.println(LOTTO_RESULT_OUTPUT_MESSAGE);
-        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FIFTH));
-        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FOURTH));
-        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.get(Rank.THIRD));
-        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.get(Rank.SECOND));
-        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.get(Rank.FIRST));
+        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FIFTH));
+        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FOURTH));
+        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.THIRD));
+        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.SECOND));
+        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FIRST));
     }
 
     public static void printLottoYield(double yield) {

@@ -18,13 +18,13 @@ public class Lottoes {
         return lottoes.size();
     }
 
-    public Map<Rank, Integer> getLottoWinResult(Map<Rank, Integer> lottoResult, WinningLotto winningLotto) {
+    public WinningResult getLottoWinResult(Map<Rank, Integer> lottoResult, WinningLotto winningLotto) {
         for(Lotto lotto : lottoes) {
             Rank rank = winningLotto.match(lotto);
 
             lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
         }
 
-        return lottoResult;
+        return new WinningResult(lottoResult);
     }
 }

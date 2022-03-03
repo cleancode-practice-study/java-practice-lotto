@@ -50,7 +50,7 @@ public class Controller {
     }
 
     private void printResult(WinningLotto winningLotto, Lottoes lottoes) {
-        Map<Rank, Integer> lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
+        WinningResult lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
 
         double yield = GameHelper.getYield(lottoWinResult, lottoes.getLottoesCount() * LOTTO_PRICE_PER_ONE);
 

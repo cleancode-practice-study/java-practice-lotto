@@ -51,12 +51,10 @@ public class GameHelper {
         return winningLottoNumber;
     }
 
-    public static Map<Rank, Integer> getLottoWinResult(WinningLotto winningLotto, Lottoes lottoes) {
+    public static WinningResult getLottoWinResult(WinningLotto winningLotto, Lottoes lottoes) {
         Map<Rank, Integer> lottoResult = createResult();
 
-        lottoResult = lottoes.getLottoWinResult(lottoResult, winningLotto);
-
-        return lottoResult;
+        return lottoes.getLottoWinResult(lottoResult, winningLotto);
     }
 
     private static Map<Rank, Integer> createResult(){
@@ -72,17 +70,17 @@ public class GameHelper {
         return lottoResult;
     }
 
-    public static double getYield(Map<Rank, Integer> lottoWinResult, int lottoPrice) {
+    public static double getYield(WinningResult lottoWinResult, int lottoPrice) {
         int totalGetMoney = getLottoTotalMoney(lottoWinResult);
 
         return (double)totalGetMoney / lottoPrice;
     }
 
-    private static int getLottoTotalMoney(Map<Rank, Integer> lottoWinResult) {
+    private static int getLottoTotalMoney(WinningResult lottoWinResult) {
         int totalWinMoney = 0;
 
-        for(Rank rank : lottoWinResult.keySet()) {
-            if(lottoWinResult.get(rank) > 0) {
+        for(Rank rank : lottoWinResult.getLottoResult().keySet()) {
+            if(lottoWinResult.getLottoResult().get(rank) > 0) {
                 totalWinMoney += rank.getWinningMoney();
             }
         }
