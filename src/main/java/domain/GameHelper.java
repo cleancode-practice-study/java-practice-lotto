@@ -60,12 +60,7 @@ public class GameHelper {
         // 맞은 로또 결과 저장할 Map 초기화
         Map<Rank, Integer> lottoResult = createResult();
 
-        for(Lotto lotto : lottoes.getLottoes()) {
-            // 로또 하나 당 당첨 로또랑 비교해서 몇 개 맞았는 지 랭크 확인
-            Rank rank = winningLotto.match(lotto);
-
-            lottoResult.put(rank, lottoResult.getOrDefault(rank, 0) + 1);
-        }
+        lottoResult = lottoes.getLottoWinResult(lottoResult, winningLotto);
 
         return lottoResult;
     }
