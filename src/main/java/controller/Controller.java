@@ -65,7 +65,7 @@ public class Controller {
         Map<Rank, Integer> lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
 
         // 수익률 구하기
-        double yield = GameHelper.getYield(lottoWinResult, lottoes.getLottoes().size() * LOTTO_PRICE_PER_ONE);
+        double yield = GameHelper.getYield(lottoWinResult, lottoes.getLottoesCount() * LOTTO_PRICE_PER_ONE);
 
         // 당첨 통계 출력
         OutputView.printLottoResult(lottoWinResult);

@@ -12,4 +12,8 @@ public class Lottoes {
     public List<Lotto> getLottoes() {
         return lottoes;
     }
+
+    public int getLottoesCount() {
+        return lottoes.size();
+    }
 }
