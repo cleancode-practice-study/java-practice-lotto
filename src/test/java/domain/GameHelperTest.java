@@ -70,11 +70,11 @@ public class GameHelperTest {
 
         WinningLotto winningLotto = new WinningLotto(lottoForWinningLotto, 7);
 
-        Map<Rank, Integer> lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
+        WinningResult lottoWinResult = GameHelper.getLottoWinResult(winningLotto, lottoes);
 
-        assertThat(lottoWinResult.get(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoWinResult.get(Rank.SECOND)).isEqualTo(1);
-        assertThat(lottoWinResult.get(Rank.FIFTH)).isEqualTo(0);
+        assertThat(lottoWinResult.getLottoResult().get(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoResult().get(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottoWinResult.getLottoResult().get(Rank.FIFTH)).isEqualTo(0);
     }
 
     @Test
@@ -88,9 +88,11 @@ public class GameHelperTest {
         lottoResult.put(Rank.SECOND, 1);
         lottoResult.put(Rank.FIRST, 0);
 
+        WinningResult lottoWinResult = new WinningResult(lottoResult);
+
         int lottoPrice = 5000;
 
-        double yield = GameHelper.getYield(lottoResult, lottoPrice);
+        double yield = GameHelper.getYield(lottoWinResult, lottoPrice);
 
         assertThat(yield).isEqualTo(6301);
     }
