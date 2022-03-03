@@ -1,9 +1,6 @@
 package controller;
 
-import model.Lotto;
-import model.Rank;
-import model.Statistics;
-import model.WinningLotto;
+import model.*;
 import view.OutputView;
 
 import java.util.List;
@@ -18,11 +15,11 @@ public class MainController {
 
     // 사용자 로또 생성
     private List<Lotto> createUserLotto() {
-        int cost = InputController.getCost(); // view 호출, 사용자 로또 구입 금액 구하기
-        int count = Lotto.getCount(cost); // model 호출, 사용자 로또 구입 갯수 구하기
+        int cost = InputController.inputCost(); // view 호출, 사용자 로또 구입 금액 입력
+        int count = User.getCount(cost); // model 호출, 사용자 로또 구입 갯수 구하기
         OutputView.printPurchaseMessage(count); // view 호출, 사용자 로또 구입 갯수 안내 메세지 출력
 
-        List<Lotto> userLotto = Lotto.getUserLotto(count); // model 호출, 사용자 구입 로또 리스트 구하기
+        List<Lotto> userLotto = User.getTotalLotto(count); // model 호출, 사용자 구입 로또 리스트 구하기
         OutputView.printUserLotto(userLotto); // view 호출, 사용자 구입 로또 리스트 출력
 
         return userLotto;
@@ -30,8 +27,8 @@ public class MainController {
 
     // 당첨 로또 생성
     private WinningLotto createWinningLotto() {
-        String[] winningNumber = InputController.getWinningNumber(); // view 호출, 지난주 당첨 번호 구하기
-        int bonusNumber = InputController.getBonusNumber(); // view 호출, 지난주 보너스 번호 구하기
+        String[] winningNumber = InputController.inputWinningNumber(); // view 호출, 지난주 당첨 번호 입력
+        int bonusNumber = InputController.inputBonusNumber(); // view 호출, 지난주 보너스 번호 입력
 
         List<Integer> winningNumbers = Lotto.changeStringArrayToList(winningNumber); // model 호출, string[] > list<Integer>
         Lotto lotto = Lotto.getLotto(winningNumbers); // model 호출, 당첨 로또 생성

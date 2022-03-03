@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lotto {
-    private static final int LOTTO_TICKET_PRICE = 1000;
     private static final int LOTTO_TICKET_LENGTH = 6;
     private final List<Integer> numbers;
 
@@ -19,27 +18,7 @@ public class Lotto {
 
     // 매개변수로 받은 숫자로 생성된 로또 반환
     public static Lotto getLotto(List<Integer> numbers) {
-        Lotto lotto = new Lotto(numbers); // 로또 티켓 생성
-
-        return lotto;
-    }
-
-    // 사용자 랜덤 로또 리스트 반환
-    public static List<Lotto> getUserLotto(int count) {
-        List<Lotto> userLotto = new ArrayList<>();
-
-        // 랜덤 로또 생성
-        for (int i = 0; i < count; i++) {
-            Lotto lotto = getRandomLotto();
-            userLotto.add(lotto);
-        }
-
-        return userLotto;
-    }
-
-    // 로또 구입 갯수 계산 메소드
-    public static int getCount(int cost) {
-        return cost / LOTTO_TICKET_PRICE;
+        return new Lotto(numbers);
     }
 
     // string[] > list<Integer>
@@ -91,7 +70,7 @@ public class Lotto {
     }
 
     // 랜덤 숫자로 생성된 로또 반환
-    private static Lotto getRandomLotto() {
+    public static Lotto getRandomLotto() {
         List<Integer> randomNumber = getRandomNumbers();
 
         return new Lotto(randomNumber);

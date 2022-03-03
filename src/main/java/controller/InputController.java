@@ -6,7 +6,7 @@ import view.InputView;
 
 public class InputController {
     // 구입 금액 반환
-    public static int getCost() {
+    public static int inputCost() {
         int cost = 0;
 
         do {
@@ -19,7 +19,7 @@ public class InputController {
     }
 
     // 지난 주 당첨 번호 반환
-    public static String[] getWinningNumber() {
+    public static String[] inputWinningNumber() {
         String[] winningNumber;
 
         do {
@@ -32,7 +32,7 @@ public class InputController {
     }
 
     // 지난 주 보너스 번호 반환
-    public static int getBonusNumber() {
+    public static int inputBonusNumber() {
         int bonusNumber = 0;
 
         do {
