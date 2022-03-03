@@ -11,14 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTest {
     @Test
     public void 로또_객체_생성() {
-        List<Integer> lottoNumber = new ArrayList<>();
-
-        lottoNumber.add(1);
-        lottoNumber.add(2);
-        lottoNumber.add(3);
-        lottoNumber.add(4);
-        lottoNumber.add(5);
-        lottoNumber.add(6);
+        List<Integer> lottoNumber = Arrays.asList(1, 2, 3, 4, 5, 6);
 
         Lotto lotto = new Lotto(lottoNumber);
 
