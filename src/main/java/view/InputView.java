@@ -42,11 +42,4 @@ public class InputView {
         System.out.println(WINNING_LOTTO_BONUS_INPUT_MESSAGE);
         return getInt();
     }
-
-    public static void checkValidWinningLottoNumber(boolean isValid) {
-        if (!isValid) {
-            System.out.println(WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
-        }
-    }
-
 }
