@@ -1,5 +1,7 @@
 package model;
 
+import util.RandomLottoNumber;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class User {
 
         // 랜덤 로또 생성
         for (int i = 0; i < count; i++) {
-            Lotto lotto = Lotto.getRandomLotto();
+            Lotto lotto = RandomLottoNumber.getRandomLotto();
             userLotto.add(lotto);
         }
 

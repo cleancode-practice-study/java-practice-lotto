@@ -9,6 +9,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTest {
     @Test
+    void 사용자_로또와_당첨_로또의_매치_갯수를_구하는_경우() {
+        //given
+        List<Integer> userNumber = new ArrayList<>();
+        userNumber.add(1);
+        userNumber.add(2);
+        userNumber.add(3);
+        userNumber.add(4);
+        userNumber.add(5);
+        userNumber.add(6);
+
+        List<Integer> winningNumber = new ArrayList<>();
+        winningNumber.add(1);
+        winningNumber.add(4);
+        winningNumber.add(5);
+        winningNumber.add(8);
+        winningNumber.add(15);
+        winningNumber.add(27);
+
+        Lotto userLotto = new Lotto(userNumber);
+        Lotto winningLotto = new Lotto(winningNumber);
+
+        //when
+        int matchCount = userLotto.getMatchCount(winningLotto);
+
+        //then
+        assertThat(matchCount).isEqualTo(3);
+    }
+
+    @Test
     void 보너스_숫자가_포함되는_경우() {
         //given
         List<Integer> userNumbers = new ArrayList<>();
@@ -40,33 +69,5 @@ public class LottoTest {
 
         //then
         assertThat(result).isEqualTo(false);
-    }
-
-    @Test
-    void 당첨_번호를_쉼표_기준으로_자르는_경우() {
-        //given
-        String number = "1,2,3";
-
-        //when
-        String[] numbers = Lotto.splitNumbers(number);
-
-        //then
-        assertThat(numbers[0]).isEqualTo("1");
-        assertThat(numbers[1]).isEqualTo("2");
-        assertThat(numbers[2]).isEqualTo("3");
-    }
-
-    @Test
-    void 배열을_리스트로_변환하는_경우() {
-        //given
-        String[] array = {"1", "2", "3"};
-
-        //when
-        List<Integer> list = Lotto.changeStringArrayToList(array);
-
-        //then
-        assertThat(list.get(0)).isEqualTo(1);
-        assertThat(list.get(1)).isEqualTo(2);
-        assertThat(list.get(2)).isEqualTo(3);
     }
 }

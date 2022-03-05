@@ -30,7 +30,7 @@ public class MainController {
         String[] winningNumber = InputController.inputWinningNumber(); // view 호출, 지난주 당첨 번호 입력
         int bonusNumber = InputController.inputBonusNumber(); // view 호출, 지난주 보너스 번호 입력
 
-        List<Integer> winningNumbers = Lotto.changeStringArrayToList(winningNumber); // model 호출, string[] > list<Integer>
+        List<Integer> winningNumbers = Convert.changeStringArrayToList(winningNumber); // string[] > list<Integer>
         Lotto lotto = Lotto.getLotto(winningNumbers); // model 호출, 당첨 로또 생성
 
         return new WinningLotto(lotto, bonusNumber);
