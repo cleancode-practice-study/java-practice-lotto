@@ -27,7 +27,7 @@ public class GameHelper {
     }
 
     public static WinningLotto createWinningLotto(String winningNumbers, int bonusNumber) {
-        Set<Integer> splitNumbers = splitWinnigLottoNumber(winningNumbers);
+        Set<Integer> splitNumbers = splitWinningLottoNumber(winningNumbers);
         List<Integer> winningLottoNumber = new ArrayList<>(splitNumbers);
 
         Lotto lotto = new Lotto(winningLottoNumber);
@@ -36,11 +36,11 @@ public class GameHelper {
     }
 
     public static boolean checkDuplicatedNumber(String winningNumbers) {
-        Set<Integer> splitWinningNumbers = splitWinnigLottoNumber(winningNumbers);
+        Set<Integer> splitWinningNumbers = splitWinningLottoNumber(winningNumbers);
         return splitWinningNumbers.size() == LOTTO_NUM_PER_ONE_LINE;
     }
 
-    private static Set<Integer> splitWinnigLottoNumber(String winningNumbers) {
+    private static Set<Integer> splitWinningLottoNumber(String winningNumbers) {
         String[] splitNumbers = winningNumbers.split(",");
         Set<Integer> winningLottoNumber = new HashSet<>();
 
