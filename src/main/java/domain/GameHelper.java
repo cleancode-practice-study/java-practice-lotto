@@ -52,23 +52,10 @@ public class GameHelper {
     }
 
     public static WinningResult getLottoWinResult(WinningLotto winningLotto, Lottoes lottoes) {
-        Map<Rank, Integer> lottoResult = createResult();
-
-        return lottoes.getLottoWinResult(lottoResult, winningLotto);
+        return lottoes.getLottoWinResult(winningLotto);
     }
 
-    private static Map<Rank, Integer> createResult(){
-        Map<Rank, Integer> lottoResult = new HashMap<>();
 
-        lottoResult.put(Rank.MISS, 0);
-        lottoResult.put(Rank.FIFTH, 0);
-        lottoResult.put(Rank.FOURTH, 0);
-        lottoResult.put(Rank.THIRD, 0);
-        lottoResult.put(Rank.SECOND, 0);
-        lottoResult.put(Rank.FIRST, 0);
-
-        return lottoResult;
-    }
 
     public static double getYield(WinningResult lottoWinResult, int lottoPrice) {
         int totalGetMoney = getLottoTotalMoney(lottoWinResult);

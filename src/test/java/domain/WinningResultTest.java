@@ -3,9 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,16 +30,7 @@ public class WinningResultTest {
         WinningLotto winningLotto = new WinningLotto(winLotto, bonus);
 
         // create lottoWinResult
-        Map<Rank, Integer> lottoResult = new HashMap<>();
-
-        lottoResult.put(Rank.MISS, 0);
-        lottoResult.put(Rank.FIFTH, 0);
-        lottoResult.put(Rank.FOURTH, 0);
-        lottoResult.put(Rank.THIRD, 0);
-        lottoResult.put(Rank.SECOND, 0);
-        lottoResult.put(Rank.FIRST, 0);
-
-        WinningResult lottoWinResult = lottoes.getLottoWinResult(lottoResult, winningLotto);
+        WinningResult lottoWinResult = lottoes.getLottoWinResult(winningLotto);
 
         assertThat(lottoWinResult.getLottoResult().get(Rank.FIRST)).isEqualTo(1);
         assertThat(lottoWinResult.getLottoResult().get(Rank.SECOND)).isEqualTo(1);
