@@ -55,24 +55,11 @@ public class GameHelper {
         return lottoes.getLottoWinResult(winningLotto);
     }
 
-
-
     public static double getYield(WinningResult lottoWinResult, int lottoPrice) {
-        int totalGetMoney = getLottoTotalMoney(lottoWinResult);
+        int totalGetMoney = lottoWinResult.getLottoTotalMoney();
 
         return (double)totalGetMoney / lottoPrice;
     }
 
-    private static int getLottoTotalMoney(WinningResult lottoWinResult) {
-        int totalWinMoney = 0;
-
-        for(Rank rank : lottoWinResult.getLottoResult().keySet()) {
-            if(lottoWinResult.getLottoResult().get(rank) > 0) {
-                totalWinMoney += rank.getWinningMoney();
-            }
-        }
-
-        return totalWinMoney;
-    }
 
 }
