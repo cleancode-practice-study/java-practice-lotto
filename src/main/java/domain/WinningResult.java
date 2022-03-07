@@ -13,6 +13,10 @@ public class WinningResult {
         return lottoResult;
     }
 
+    public int getCountOfLottoResult(Rank rank) {
+        return lottoResult.get(rank);
+    }
+
     public int getLottoTotalMoney() {
         int totalWinMoney = 0;
 

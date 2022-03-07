@@ -5,8 +5,6 @@ import domain.Lottoes;
 import domain.Rank;
 import domain.WinningResult;
 
-import java.util.Map;
-
 public class OutputView {
     private static final String LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE = "%s개를 구매했습니다.";
     private static final String WINNING_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 있습니다. 다시 입력해 주세요.";
@@ -37,11 +35,11 @@ public class OutputView {
     public static void printLottoResult(WinningResult lottoWinResult) {
         System.out.println();
         System.out.println(LOTTO_RESULT_OUTPUT_MESSAGE);
-        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FIFTH));
-        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FOURTH));
-        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.THIRD));
-        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.SECOND));
-        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.getLottoResult().get(Rank.FIRST));
+        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FIFTH));
+        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FOURTH));
+        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.THIRD));
+        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.SECOND));
+        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FIRST));
     }
 
     public static void printLottoYield(double yield) {
