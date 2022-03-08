@@ -8,7 +8,6 @@ public class InputView {
     private static final String LOTTO_PRICE_ERROR_MESSAGE = "[ERROR] 올바른 로또 금액으로 입력해 주세요. (1000원 단위)";
     private static final String WINNING_LOTTO_NUMBER_INPUT_MESSAGE = "지난 주 당첨번호를 입력해 주세요.";
     private static final String WINNING_LOTTO_BONUS_INPUT_MESSAGE = "보너스 볼을 입력해주세요.";
-    private static final String WINNING_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 있습니다. 다시 입력해 주세요.";
 
     private static final Scanner scanner = new Scanner(System.in);
 
