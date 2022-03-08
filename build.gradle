@@ -22,4 +22,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e48d56593e71678ae756b8879152e33472a6cdb8

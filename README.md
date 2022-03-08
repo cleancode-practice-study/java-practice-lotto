@@ -2,11 +2,16 @@
 
 ## 구현할 기능 목록
 
-##### 여기에 작성
-
-
-
-
+##### - inputView 이용해서 Lotto 구매 금액 입력 받는 기능 추가
+##### - 총 몇개의 로또를 구매했는지 출력 기능 추가 
+##### - 구매 금액 만큼 로또 객체 생성하는 기능 추가 
+##### - 구매한 로또 OutputView로 출력하는 기능 추가 
+##### - 지난 주 당첨 번호 입력 받는 기능 추가 
+##### - 보너스 당첨 번호 입력 받는 기능 추가
+##### - 입력받은 번호로 WinningLotto 객체 생성 기능 추가 
+##### - 지난 주 당첨 번호와 생성된 로또가 맞는 지 확인하는 기능 추가
+##### - 당첨 통계 계산하는 기능 추가 
+##### - 당첨 통계 결과 OutputView로 출력하는 기능 추가 
 
 ## 🚀 기능 요구사항
 - 로또 게임 기능을 구현해야 한다. 규칙을 모르면 검색해 로또 규칙을 찾아본다.
@@ -96,17 +101,17 @@ public class Application {
 }
 ```
 
-### 프로그래밍 요구사항 - Lotto
-- Lotto 객체를 활용해 구현해야 한다.
-- Lotto 기본 생성자를 추가할 수 없다.
+### 프로그래밍 요구사항 - domain.Lotto
+- domain.Lotto 객체를 활용해 구현해야 한다.
+- domain.Lotto 기본 생성자를 추가할 수 없다.
 - numbers 변수의 접근 제어자인 private을 변경할 수 없다.
 - Lotto에 필드(인스턴스 변수)를 추가할 수 없다. 
 
 ```java
-public class Lotto {
+public class domain.Lotto {
 	private final List<Integer> numbers;
 
-	public Lotto(List<Integer> numbers) {
+	public domain.Lotto(List<Integer> numbers) {
 		this.numbers = numbers;
 	}
 
@@ -114,24 +119,24 @@ public class Lotto {
 }
 ```
 
-### 프로그래밍 요구사항 - WinningLotto
-- WinningLotto 객체를 활용해 구현해야 한다.
+### 프로그래밍 요구사항 - domain.WinningLotto
+- domain.WinningLotto 객체를 활용해 구현해야 한다.
 - match() 메서드의 반환 값인 Rank는 저장소에서 제공한다.
-- WinningLotto 기본 생성자를 추가할 수 없다.
+- domain.WinningLotto 기본 생성자를 추가할 수 없다.
 - lotto, bonusNo 변수의 접근제어자인 private을 변경할 수 없다.
 - WinningLotto에 필드(인스턴스 변수)를 추가할 수 없다.
 
 ```java
-public class WinningLotto {
-	private final Lotto lotto;
+public class domain.WinningLotto {
+	private final domain.Lotto lotto;
 	private final int bonusNo;
 
-	public WinningLotto(Lotto lotto, int bonusNo) {
+	public domain.WinningLotto(domain.Lotto lotto, int bonusNo) {
 		this.lotto = lotto;
 		this.bonusNo = bonusNo;
 	}
 
-	public Rank match(Lotto userLotto) {
+	public domain.Rank match(domain.Lotto userLotto) {
 		// TODO 로직 구현
 		return null;
 	}

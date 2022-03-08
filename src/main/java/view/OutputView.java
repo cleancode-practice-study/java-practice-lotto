@@ -1,48 +1,52 @@
 package view;
 
-import model.Lotto;
-import model.Rank;
-
-import java.text.DecimalFormat;
-import java.util.List;
-import java.util.Map;
+import domain.Lotto;
+import domain.Lottoes;
+import domain.Rank;
+import domain.WinningResult;
 
 public class OutputView {
-    private static final String PURCHASE_INFORMATION_MESSAGE = "개를 구매했습니다.";
-    private static final String WINNING_STATISTICS_INFORMATION_MESSAGE = "당첨 통계\n------------------";
-    private static final String FIFTH_RANK_GUIDE_MESSAGE = "3개 일치 (5,000원) - ";
-    private static final String FOURTH_RANK_GUIDE_MESSAGE = "4개 일치 (50,000원) - ";
-    private static final String THREE_RANK_GUIDE_MESSAGE = "5개 일치 (1,500,000원) - ";
-    private static final String SECOND_RANK_GUIDE_MESSAGE = "5개 일치, 보너스 볼 일치 (30,000,000원) - ";
-    private static final String FIRST_RANK_GUIDE_MESSAGE = "6개 일치 (2,000,000,000원) - ";
-    private static final String LOTTO_UNIT = "개";
-    private static final String TOTAL_YIELD_MESSAGE = "총 수익률은 ";
-    private static final String PREPOSITIONAL_PARTICLE_FOR_VERB_MESSAGE = " 입니다.";
+    private static final String LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE = "%s개를 구매했습니다.";
+    private static final String WINNING_LOTTO_NUMBER_ERROR_MESSAGE = "[ERROR] 중복된 숫자가 있습니다. 다시 입력해 주세요.";
+    private static final String LOTTO_RESULT_OUTPUT_MESSAGE = "당첨 통계\n----------------";
+    private static final String LOTTO_FIFTH_OUTPUT_MESSAGE = "3개 일치 (5000원) - %d개\n";
+    private static final String LOTTO_FOURTH_OUTPUT_MESSAGE = "4개 일치 (50000원) - %d개\n";
+    private static final String LOTTO_THIRD_OUTPUT_MESSAGE = "5개 일치 (1500000원) - %d개\n";
+    private static final String LOTTO_SECOND_OUTPUT_MESSAGE = "5개 일치, 보너스 볼 일치 (30000000원) - %d개\n";
+    private static final String LOTTO_FIRST_OUTPUT_MESSAGE = "6개 일치 (2000000000)원 - %d개\n";
+    private static final String LOTTO_YIELD_OUTPUT_MESSAGE = "총 수익률은 %.2f입니다.\n";
 
-    public static void printPurchaseMessage(int amount) {
-        System.out.println(amount + PURCHASE_INFORMATION_MESSAGE);
+    public static void printLottoCount(int lottoCount) {
+        System.out.println();
+        System.out.printf(LOTTO_PURCHASE_COUNT_OUTPUT_MESSAGE, lottoCount);
+        System.out.println();
     }
 
-    public static void printUserLotto(List<Lotto> userLotto) {
-        for (Lotto lotto : userLotto) {
-            List<Integer> lottoNumber = lotto.getNumber();
-            System.out.println(lottoNumber);
+    public static void printInvalidLottoNumberError() {
+        System.out.println(WINNING_LOTTO_NUMBER_ERROR_MESSAGE);
+    }
+
+    public static void printLottoNumber(Lottoes lottoes) {
+        for (Lotto lotto : lottoes.getLottoes()) {
+            System.out.println(lotto.getLottoNum());
         }
-        System.out.println("");
     }
 
-    public static void printWinningStatistics(Map<Rank, Integer> winningStatistics) {
-        System.out.println(WINNING_STATISTICS_INFORMATION_MESSAGE);
-        System.out.println(FIFTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FIFTH) + LOTTO_UNIT);
-        System.out.println(FOURTH_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FOURTH) + LOTTO_UNIT);
-        System.out.println(THREE_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.THIRD) + LOTTO_UNIT);
-        System.out.println(SECOND_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.SECOND) + LOTTO_UNIT);
-        System.out.println(FIRST_RANK_GUIDE_MESSAGE + winningStatistics.get(Rank.FIRST) + LOTTO_UNIT);
+    public static void printLottoResult(WinningResult lottoWinResult) {
+        System.out.println();
+        System.out.println(LOTTO_RESULT_OUTPUT_MESSAGE);
+        System.out.printf(LOTTO_FIFTH_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FIFTH));
+        System.out.printf(LOTTO_FOURTH_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FOURTH));
+        System.out.printf(LOTTO_THIRD_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.THIRD));
+        System.out.printf(LOTTO_SECOND_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.SECOND));
+        System.out.printf(LOTTO_FIRST_OUTPUT_MESSAGE, lottoWinResult.getCountOfLottoResult(Rank.FIRST));
     }
 
-    public static void printTotalYield(double yield) {
-        DecimalFormat form = new DecimalFormat("#,##0.00");
+    public static void printLottoYield(double yield) {
+        System.out.printf(LOTTO_YIELD_OUTPUT_MESSAGE, yield);
+    }
 
-        System.out.println(TOTAL_YIELD_MESSAGE + form.format(yield) + PREPOSITIONAL_PARTICLE_FOR_VERB_MESSAGE);
+    public static void printNextLine() {
+        System.out.println();
     }
 }
